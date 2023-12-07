@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: ../docs/
 
 website:
   title: "Logbook"
@@ -15,7 +16,6 @@ format:
   html:
     theme: cosmo
     toc: true
-    keep-md: true
 
 
 
