@@ -1,5 +1,7 @@
 # Clean Census data
 
+## Load packages
+
 ``` r
 1 + 1
 ```

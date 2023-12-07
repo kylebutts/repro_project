@@ -1,16 +1,3 @@
-# Removes the base directory from a path
-rm_base_dir <- function(dir, base_dir) {
-  if (!grepl("/$", base_dir)) { 
-    base_dir = paste0(base_dir, "/")
-  }
-  gsub(base_dir, "", dir)
-}
-
-# Remove path extension
-path_ext_remove <- function(file) {
-  sub("\\.[a-zA-Z0-9]*$", "", file)
-}
-
 #' Create a `.qmd` log of an `.R` file
 #' 
 #' @description
@@ -37,33 +24,32 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   
   # In case absolute path is given
   orig_file = file
-  file = rm_base_dir(file, here::here())
+  file = fs::path_rel(file, here::here())
   file_dir = dirname(file)
-  temp_dir = paste0(file_dir, "/temp")
   
-  # TODO: Make temp folder to create readme.md
+  # Make temp folder to create readme.md
+  temp_dir = paste0(file_dir, "/temp")
   fs::dir_create(here::here(temp_dir))
+
   qmd_file = here::here(temp_dir, "index.qmd")
   md_file = here::here(temp_dir, "index.md")
   md_file_folder = here::here(temp_dir, "index_files")
 
   out_dir = here::here(
     out_base_dir, 
-    file |> rm_base_dir(code_base_dir) |> path_ext_remove() 
+    file |> fs::path_rel(code_base_dir) |> fs::path_ext_remove() 
   )
-  # qmd_file = here::here(file_dir, "readme.qmd")
 
   # Read in file
   txt = xfun::read_utf8(here::here(file))
   
   # Convert # Header ---- to #' ## Header
-  # if (any(grepl("^(?<!#' )(#{1,})", txt))) {
-  #   txt = gsub(
-  #     "^(?<!#' )(#{1,}) (.*) -{4,}", 
-  #     "#' \\1# \\2", 
-  #     txt
-  #   )
-  # }
+  regex_header = "^(#{1,})\\s(.*)-{4,}"
+  txt = gsub(
+    regex_header, 
+    "#' \\1# \\2", 
+    txt
+  )
 
   # `.R` -> `.qmd`
   qmd_txt = knitr::spin(
@@ -86,44 +72,24 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   # Create output directory in logbook 
   fs::dir_create(out_dir)
   out_dir_files = here::here(out_dir, "index_files")
+  
   if (fs::dir_exists(out_dir_files)) fs::dir_delete(out_dir_files)
+  
   fs::dir_create(out_dir_files)
-  # fs::file_copy(
-  #   md_file, 
-  #   here::here(out_dir, "readme.md"),
-  #   overwrite = TRUE
-  # )
   fs::file_copy(
     md_file, 
     here::here(out_dir, "index.md"),
     overwrite = TRUE
   )
-  fs::file_move(
-    md_file_folder, 
-    here::here(out_dir)
-  )
+  if (fs::dir_exists(md_file_folder)) {
+    fs::file_move(
+      md_file_folder, 
+      here::here(out_dir)
+    )
+  }
 
   # TODO: Option to not delete `.qmd` file
   fs::dir_delete(temp_dir)
 
   return(invisible(NULL))
 }
-
-# render_file("code/cleaning/clean_census.R")
-
-spin_files <- function(out_base_dir = "logbook", code_base_dir = "code") {
-  files = list.files(
-    here::here(code_base_dir), 
-    pattern = "\\.R$", 
-    recursive = TRUE, 
-    full.names = TRUE
-  )
-  for (file in files) {
-    spin_file(file, out_base_dir, code_base_dir)
-  }
-}
-
-# TODO: Don't copy over files that haven't changed
-spin_files()
-
-
