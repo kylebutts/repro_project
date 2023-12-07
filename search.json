@@ -4,73 +4,48 @@
     "href": "cleaning/clean_shapefiles/index.html",
     "title": "Clean Census data",
     "section": "",
-    "text": "print(\"hello\")\n[1] \"hello\"",
-    "crumbs": [
-      "Cleaning",
-      "Clean Census data"
-    ]
+    "text": "print(\"hello\")\n[1] \"hello\""
   },
   {
     "objectID": "cleaning/clean_shapefiles/index.html#load-packages",
     "href": "cleaning/clean_shapefiles/index.html#load-packages",
     "title": "Clean Census data",
     "section": "",
-    "text": "print(\"hello\")\n[1] \"hello\"",
-    "crumbs": [
-      "Cleaning",
-      "Clean Census data"
-    ]
+    "text": "print(\"hello\")\n[1] \"hello\""
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Paper Title",
     "section": "",
-    "text": "Kyle Butts1\n1University of Colorado: Boulder\nReplication Material | Paper\n\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\n\n@techreport{key,\n  title={Paper Title},\n  author={Butts, Kyle},\n  year={20XX}\n}",
-    "crumbs": [
-      "Paper Title"
-    ]
+    "text": "Kyle Butts1\n1University of Colorado: Boulder\nReplication Material | Paper\n\n\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n\n\n@techreport{key,\n  title={Paper Title},\n  author={Butts, Kyle},\n  year={20XX}\n}"
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
     "title": "Paper Title",
     "section": "",
-    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "crumbs": [
-      "Paper Title"
-    ]
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
   },
   {
     "objectID": "index.html#citation",
     "href": "index.html#citation",
     "title": "Paper Title",
     "section": "",
-    "text": "@techreport{key,\n  title={Paper Title},\n  author={Butts, Kyle},\n  year={20XX}\n}",
-    "crumbs": [
-      "Paper Title"
-    ]
+    "text": "@techreport{key,\n  title={Paper Title},\n  author={Butts, Kyle},\n  year={20XX}\n}"
   },
   {
     "objectID": "cleaning/clean_census/index.html",
     "href": "cleaning/clean_census/index.html",
     "title": "Clean Census data",
     "section": "",
-    "text": "1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)",
-    "crumbs": [
-      "Cleaning",
-      "Clean Census data"
-    ]
+    "text": "1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)"
   },
   {
     "objectID": "cleaning/clean_census/index.html#load-packages",
     "href": "cleaning/clean_census/index.html#load-packages",
     "title": "Clean Census data",
     "section": "",
-    "text": "1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)",
-    "crumbs": [
-      "Cleaning",
-      "Clean Census data"
-    ]
+    "text": "1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)"
   }
 ]
