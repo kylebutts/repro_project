@@ -1,4 +1,17 @@
-#' Create a log of a file
+# Removes the base directory from a path
+rm_base_dir <- function(dir, base_dir) {
+  if (!grepl("/$", base_dir)) { 
+    base_dir = paste0(base_dir, "/")
+  }
+  gsub(base_dir, "", dir)
+}
+
+# Remove path extension
+path_ext_remove <- function(file) {
+  sub("\\.[a-zA-Z0-9]*$", "", file)
+}
+
+#' Create a `.qmd` log of an `.R` file
 #' 
 #' @description
 #' This takes a plain `.R` script, converts it to an `.Rmd` file using `knitr::spin()`, and then runs/logs using `rmarkdown::render()`. It takes a path to the `.R` file and creates an entry to `out_dir` using the same folder strucutre as the `.R file`. For example, if you have `file = "code/analysis/create_land_price_index.R"`, `out_base_dir = "logbook"` and `code_base_dir = "code"` it will create a logbook entry at `logbook/analysis/create_land_price_index.Rmd`.
@@ -20,23 +33,29 @@
 #' `"all"` which will render all formats specified in the frontmatter.
 #' 
 #' @return Nothing, but creates a log of the file
-spin_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") {
+render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", format = "gfm") {
   
   # In case absolute path is given
+  orig_file = file
   file = rm_base_dir(file, here::here())
-  qmd_file = gsub(".R", ".qmd", file)
+  file_dir = dirname(file)
+  temp_dir = paste0(file_dir, "/temp")
   
-  # Create output directory 
+  # TODO: Make temp folder to create readme.md
+  dir.create(here::here(temp_dir), showWarnings = FALSE, recursive = TRUE)
+  qmd_file = here::here(temp_dir, "readme.qmd")
+  md_file = here::here(temp_dir, "readme.md")
+  md_file_folder = here::here(temp_dir, "readme_files")
+
   out_dir = here::here(
     out_base_dir, 
     file |> rm_base_dir(code_base_dir) |> path_ext_remove() 
   )
-  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+  # qmd_file = here::here(file_dir, "readme.qmd")
 
   # Read in file
   txt = xfun::read_utf8(here::here(file))
   
-  # Step 1. 
   # Convert # Header ---- to #' ## Header
   # if (any(grepl("^(?<!#' )(#{1,})", txt))) {
   #   txt = gsub(
@@ -53,31 +72,33 @@ spin_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") {
   )
   cat(
     paste0(qmd_txt, collapse = "\n"), 
-    file = here::here(qmd_file)
+    file = qmd_file
   )
 
-  # Move `.qmd` file to logbook for rendering
-  qmd_file = gsub(".R", ".qmd", file)
-  qmd_out_file = here::here(out_dir, "index.qmd")
-  file.rename(
-    here::here(qmd_file), 
-    qmd_out_file
+  # TODO: Don't run if not needed !!!
+  # Render to gfm
+  quarto::quarto_render(
+    qmd_file,
+    output_format = "gfm",
+    execute_dir = here::here()
   )
+
+  # Create output directory in logbook 
+  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)  
+  fs::file_move(
+    md_file, 
+    here::here(out_dir, "readme.md")
+  )
+  fs::file_move(
+    md_file_folder, 
+    here::here(out_dir, "readme_files")
+  )
+  # TODO: Option to not delete `.qmd` file
+  fs::dir_delete(temp_dir)
+
   return(invisible(NULL))
 }
 
-# Removes the base directory from a path
-rm_base_dir <- function(dir, base_dir) {
-  if (!grepl("/$", base_dir)) { 
-    base_dir = paste0(base_dir, "/")
-  }
-  gsub(base_dir, "", dir)
-}
-
-# Remove path extension
-path_ext_remove <- function(file) {
-  sub("\\.[a-zA-Z0-9]*$", "", file)
-}
 
 spin_files <- function(out_base_dir = "logbook", code_base_dir = "code") {
   files = list.files(

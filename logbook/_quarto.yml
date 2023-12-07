@@ -7,11 +7,7 @@ website:
   sidebar: 
     contents: 
       - index.qmd 
-      - section: "Cleaning"
-        contents:
-          - cleaning/clean_census/index.qmd
-          - cleaning/
-
+      - auto: "*.md"
 format:
   html:
     theme: cosmo

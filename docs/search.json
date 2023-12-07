@@ -1,13 +1,14 @@
 [
   {
-    "objectID": "cleaning/clean_census/index.html",
-    "href": "cleaning/clean_census/index.html",
-    "title": "Clean Census data",
+    "objectID": "cleaning/clean_census/readme.html",
+    "href": "cleaning/clean_census/readme.html",
+    "title": "Logbook",
     "section": "",
-    "text": "1 + 1\n\n[1] 2\n\n\n\nplot(mtcars$mpg, mtcars$hp)",
+    "text": "1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)",
     "crumbs": [
       "Cleaning",
-      "Clean Census data"
+      "Clean Census",
+      "Readme"
     ]
   },
   {
