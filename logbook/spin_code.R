@@ -42,10 +42,10 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   temp_dir = paste0(file_dir, "/temp")
   
   # TODO: Make temp folder to create readme.md
-  dir.create(here::here(temp_dir), showWarnings = FALSE, recursive = TRUE)
-  qmd_file = here::here(temp_dir, "readme.qmd")
-  md_file = here::here(temp_dir, "readme.md")
-  md_file_folder = here::here(temp_dir, "readme_files")
+  fs::dir_create(here::here(temp_dir))
+  qmd_file = here::here(temp_dir, "index.qmd")
+  md_file = here::here(temp_dir, "index.md")
+  md_file_folder = here::here(temp_dir, "index_files")
 
   out_dir = here::here(
     out_base_dir, 
@@ -84,21 +84,32 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   )
 
   # Create output directory in logbook 
-  dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)  
-  fs::file_move(
+  fs::dir_create(out_dir)
+  out_dir_files = here::here(out_dir, "index_files")
+  if (fs::dir_exists(out_dir_files)) fs::dir_delete(out_dir_files)
+  fs::dir_create(out_dir_files)
+  # fs::file_copy(
+  #   md_file, 
+  #   here::here(out_dir, "readme.md"),
+  #   overwrite = TRUE
+  # )
+  fs::file_copy(
     md_file, 
-    here::here(out_dir, "readme.md")
+    here::here(out_dir, "index.md"),
+    overwrite = TRUE
   )
   fs::file_move(
     md_file_folder, 
-    here::here(out_dir, "readme_files")
+    here::here(out_dir)
   )
+
   # TODO: Option to not delete `.qmd` file
   fs::dir_delete(temp_dir)
 
   return(invisible(NULL))
 }
 
+# render_file("code/cleaning/clean_census.R")
 
 spin_files <- function(out_base_dir = "logbook", code_base_dir = "code") {
   files = list.files(
