@@ -6,6 +6,4 @@ I want this to be automated. So what do I do? I have a `logbook/` folder that co
 
 The `# %%` style actually converts to a `.qmd` file with the `knitr::spin()` command. So I have a script `spin_code.R` that takes `.R` files in the `code/` folder and converts them to `.qmd` files in the `logbook/` folder, following the same folder structure. 
 
-The only thing to update is the `_quarto.yml` file to include the new `.qmd` files in the `sidebar` option. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts.
-
-The website can be deployed with github pages quite easily following this guide: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site.
+The only thing to update is the `_quarto.yml` file to include the new `.qmd` files in the `sidebar` option. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts. The website is built to the `docs/` folder and can be [deployed via github pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
