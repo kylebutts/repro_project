@@ -1,5 +1,5 @@
 #' ---
-#' title: "Clean Census data"
+#' title: "Clean Shapefiles"
 #' ---
 
 # Load packages ----
