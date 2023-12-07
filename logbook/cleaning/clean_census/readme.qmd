@@ -1,0 +1,11 @@
+---
+title: "Clean Census data"
+---
+
+```{r}
+1 + 1
+
+```
+```{r}
+plot(mtcars$mpg, mtcars$hp)
+```
