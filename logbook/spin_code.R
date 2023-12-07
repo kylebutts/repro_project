@@ -58,7 +58,7 @@ spin_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") {
 
   # Move `.qmd` file to logbook for rendering
   qmd_file = gsub(".R", ".qmd", file)
-  qmd_out_file = here::here(out_dir, "readme.qmd")
+  qmd_out_file = here::here(out_dir, "index.qmd")
   file.rename(
     here::here(qmd_file), 
     qmd_out_file
@@ -92,6 +92,6 @@ spin_files <- function(out_base_dir = "logbook", code_base_dir = "code") {
 }
 
 # TODO: Don't copy over files that haven't changed
-# spin_files()
+spin_files()
 
 

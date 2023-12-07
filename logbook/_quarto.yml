@@ -4,9 +4,12 @@ project:
 website:
   title: "Logbook"
   sidebar: 
-    contents:
+    contents: 
       - index.qmd 
-      - auto: '*.qmd'
+      - section: "Cleaning"
+        contents:
+          - cleaning/clean_census/index.qmd
+          - cleaning/
 
 format:
   html:

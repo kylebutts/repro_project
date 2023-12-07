@@ -26,6 +26,6 @@ plot(mtcars$mpg, mtcars$hp)
 ```
 
 ::: {.cell-output-display}
-![](readme_files/figure-html/unnamed-chunk-2-1.png){width=672}
+![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}
 :::
 :::
