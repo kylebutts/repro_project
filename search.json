@@ -2,14 +2,14 @@
   {
     "objectID": "cleaning/clean_shapefiles/index.html",
     "href": "cleaning/clean_shapefiles/index.html",
-    "title": "Clean Census data",
+    "title": "Clean Shapefiles",
     "section": "",
     "text": "print(\"hello\")\n[1] \"hello\""
   },
   {
     "objectID": "cleaning/clean_shapefiles/index.html#load-packages",
     "href": "cleaning/clean_shapefiles/index.html#load-packages",
-    "title": "Clean Census data",
+    "title": "Clean Shapefiles",
     "section": "",
     "text": "print(\"hello\")\n[1] \"hello\""
   },
