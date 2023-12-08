@@ -1,8 +1,6 @@
 ---
 title: "Main analysis script"
-format:
-  html:
-    keep-md: true
+format: gfm
 ---
 
 
@@ -46,7 +44,7 @@ plot(mtcars$mpg, mtcars$hp)
 ```
 
 ::: {.cell-output-display}
-![](main_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](main_analysis_files/figure-html/unnamed-chunk-3-1.png){width=672}
 :::
 :::
 

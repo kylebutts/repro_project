@@ -10,9 +10,9 @@ website:
       # Can specify file order here. 
       # See https://quarto.org/docs/websites/website-navigation.html
       - section: Cleaning
-        contents: "cleaning/**/*.md"
+        contents: "cleaning/**/index.md"
       - section: Analysis
-        contents: "analysis/**/*.md"
+        contents: "analysis/**/index.md"
 
 format:
   html:
