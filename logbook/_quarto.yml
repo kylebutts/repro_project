@@ -7,7 +7,13 @@ website:
   sidebar: 
     contents: 
       - index.qmd 
-      - auto: "*.md"
+      # Can specify file order here. 
+      # See https://quarto.org/docs/websites/website-navigation.html
+      - section: Cleaning
+        contents: "cleaning/**/*.md"
+      - section: Analysis
+        contents: "analysis/**/*.md"
+
 format:
   html:
     theme: cosmo
