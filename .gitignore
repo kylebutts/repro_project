@@ -4,6 +4,7 @@
 # Quarto specific files
 docs/*
 **/.quarto/
+**/site_libs/
 
 # R files
 .Rhistory

@@ -1,9 +1,17 @@
 #' ---
 #' title: "Main analysis script"
+#' format:
+#'   html:
+#'     keep-md: true
 #' ---
 
 #' This is an example script that will be run by `render_file` and logged in 
 #' the logbook.
+#' 
+#' ::: {.callout-note}
+#' Note that there are five types of callouts, including:
+#' `note`, `warning`, `important`, `tip`, and `caution`.
+#' :::
 
 # %% 
 #| message: false
