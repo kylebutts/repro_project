@@ -8,11 +8,11 @@ This is the structure of a project that I'm really happy with. I do all my codin
 
 The `# %%` style actually converts to a `.qmd` file with the `knitr::spin()` command (see details in the [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)). I have a script `render_file.R` that takes `.R` files in the `code/` folder and converts them to `.qmd` scripts and then renders them to a `.md` file in the `logbook/` folder, following the same folder structure as in `code/`. 
 
-The logbook is a quarto website that lets you view the log in a nice website (see the live example above). It can be deployed in various ways: https://quarto.org/docs/output-formats/html-publishing.html.
+The logbook is a quarto website that lets you view the log in a nice website (see the live example above). This produces an `index.md` which will render to html and a `readme.md` which will be viewable on github. It can be deployed in various ways: https://quarto.org/docs/output-formats/html-publishing.html.
 
-## `main.R`
+## `code/main.R`
 
-The file `main.R` is the reproduction starting point. I write the files in the order they would need to be run to *completely* redo the analysis. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts. 
+The file [`code/main.R`](https://github.com/kylebutts/repro_project/blob/main/code/main.R) is the reproduction starting point. I write the files in the order they would need to be run to *completely* redo the analysis. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts. 
 
 When working on the project, you don't need to rerun everything to update the logbook, but it's good to check that everything is reproducible from time to time. 
 
