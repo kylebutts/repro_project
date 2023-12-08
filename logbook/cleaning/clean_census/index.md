@@ -1,7 +1,23 @@
-# Clean Census data
+---
+title: "Clean Census data"
+format:
+  html:
+    keep-md: true
+---
 
-``` r
+
+::: {.cell}
+
+```{.r .cell-code}
 cat("Cleaning data")
 ```
 
-    Cleaning data
+::: {.cell-output .cell-output-stdout}
+
+```
+Cleaning data
+```
+
+
+:::
+:::

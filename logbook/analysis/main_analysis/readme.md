@@ -23,8 +23,7 @@ library(fixest)
 plot(mtcars$mpg, mtcars$hp)
 ```
 
-<img src="main_analysis_files/figure-html/unnamed-chunk-3-1.png"
-width="672" />
+<img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ``` r
 knitr::kable(

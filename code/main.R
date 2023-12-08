@@ -10,5 +10,5 @@ source(here("logbook/render_file.R"))
 render_file("code/cleaning/clean_census.R")
 
 # Analysis ---------------------------------------------------------------------
-render_file("code/analysis/analysis.R")
+render_file("code/analysis/main_analysis.R")
 

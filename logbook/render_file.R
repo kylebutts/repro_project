@@ -16,11 +16,9 @@
 #' Can either be relative to `here::here()` or an absolute path.
 #' @param out_base_dir The base directory for the logbook
 #' @param code_base_dir The base directory for the code files. Relative paths will be taken relative to this directory.
-#' @param format The format to render the `.qmd` file in. The default value is 
-#' `"all"` which will render all formats specified in the frontmatter.
 #' 
 #' @return Nothing, but creates a log of the file
-render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", format = "gfm") {
+render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") {
   
   # In case absolute path is given
   orig_file = file
@@ -32,8 +30,9 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   fs::dir_create(here::here(temp_dir))
 
   qmd_file = here::here(temp_dir, "index.qmd")
-  md_file = here::here(temp_dir, "index.md")
-  md_file_folder = here::here(temp_dir, "index_files")
+  knit_file = here::here(temp_dir, "index.html.md")
+  readme_file = here::here(temp_dir, "index.html-gfm.md")
+  md_file_folder = here::here(temp_dir, "index_files", "figure-html")
 
   out_dir = here::here(
     out_base_dir, 
@@ -62,29 +61,40 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code", 
   )
 
   # TODO: Don't run if not needed !!!
-  # Render to gfm
+  # Render to html, keeping .html.md
   quarto::quarto_render(
     qmd_file,
+    output_format = "html",
+    execute_params = list("keep-md" = TRUE),
+    execute_dir = here::here()
+  )
+  # Render to gfm
+  quarto::quarto_render(
+    knit_file, 
     output_format = "gfm",
     execute_dir = here::here()
   )
 
   # Create output directory in logbook 
   fs::dir_create(out_dir)
-  out_dir_files = here::here(out_dir, "index_files")
   
-  if (fs::dir_exists(out_dir_files)) fs::dir_delete(out_dir_files)
-  
-  fs::dir_create(out_dir_files)
   fs::file_copy(
-    md_file, 
+    knit_file,
     here::here(out_dir, "index.md"),
     overwrite = TRUE
   )
+  fs::file_copy(
+    readme_file,
+    here::here(out_dir, "readme.md"),
+    overwrite = TRUE
+  )
   if (fs::dir_exists(md_file_folder)) {
+    out_dir_files = here::here(out_dir, "index_files/figure-html")
+    if (fs::dir_exists(out_dir_files)) fs::dir_delete(out_dir_files)
+    fs::dir_create(out_dir_files)
     fs::file_move(
       md_file_folder, 
-      here::here(out_dir)
+      here::here(out_dir, "index_files")
     )
   }
 
