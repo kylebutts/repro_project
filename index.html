@@ -186,6 +186,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
   </ul></li>
+  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link" data-scroll-target="#about-this-project">About this project</a>
+  <ul class="collapse">
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory structure</a></li>
+  <li><a href="#codemain.r" id="toc-codemain.r" class="nav-link" data-scroll-target="#codemain.r"><code>code/main.R</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -194,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p><a href="https://kylebutts.github.io/repro_project"><strong>View live example logbook</strong></a></p>
 <section id="paper-title" class="level1">
 <h1>Paper Title</h1>
 <p><a href="https://www.kylebutts.com/">Kyle Butts</a><sup>1</sup></p>
@@ -210,6 +216,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Butts, Kyle},</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={20XX}</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="about-this-project" class="level1">
+<h1>About this project</h1>
+<section id="directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="directory-structure">Directory structure</h2>
+<p>This is the structure of a project that I’m really happy with. I do all my coding in the <code>code/</code> folder using basic <code>.R</code> files and the <code># %%</code> syntax for code chunks (I do not really like working in <code>.qmd</code> files). However, I like the ability to run something and produce a log of graphs/output/tables that I run. This is good for sharing with coauthors and the reports can be run to make sure that the output is still the same.</p>
+<p>The <code># %%</code> style actually converts to a <code>.qmd</code> file with the <code>knitr::spin()</code> command (see details in the <a href="https://bookdown.org/yihui/rmarkdown-cookbook/spin.html">R Markdown Cookbook</a>). I have a script <code>render_file.R</code> that takes <code>.R</code> files in the <code>code/</code> folder and converts them to <code>.qmd</code> scripts and then renders them to a <code>.md</code> file in the <code>logbook/</code> folder, following the same folder structure as in <code>code/</code>.</p>
+<p>The logbook is a quarto website that lets you view the log in a nice website (see the live example above). This produces an <code>index.md</code> which will render to html and a <code>readme.md</code> which will be viewable on github. It can be deployed in various ways: https://quarto.org/docs/output-formats/html-publishing.html.</p>
+</section>
+<section id="codemain.r" class="level2">
+<h2 class="anchored" data-anchor-id="codemain.r"><code>code/main.R</code></h2>
+<p>The file <a href="https://github.com/kylebutts/repro_project/blob/main/code/main.R"><code>code/main.R</code></a> is the reproduction starting point. I write the files in the order they would need to be run to <em>completely</em> redo the analysis. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts.</p>
+<p>When working on the project, you don’t need to rerun everything to update the logbook, but it’s good to check that everything is reproducible from time to time.</p>
 
 
 </section>
