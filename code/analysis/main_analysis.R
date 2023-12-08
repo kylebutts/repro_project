@@ -1,8 +1,5 @@
 #' ---
 #' title: "Main analysis script"
-#' format:
-#'   html:
-#'     keep-md: true
 #' ---
 
 #' This is an example script that will be run by `render_file` and logged in 

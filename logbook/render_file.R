@@ -62,12 +62,15 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") 
 
   # TODO: Don't run if not needed !!!
   # Render to html, keeping .html.md
-  quarto::quarto_render(
-    qmd_file,
-    output_format = "html",
-    execute_params = list("keep-md" = TRUE),
-    execute_dir = here::here()
-  )
+  quarto_path = quarto::quarto_path()
+  system(paste0(
+    quarto_path, 
+    " render '", qmd_file, "'",
+    " --to html",
+    " -M keep-md:true",
+    " --execute-dir '", here::here(), "'",
+    collapse = "" 
+  ))
   # Render to gfm
   quarto::quarto_render(
     knit_file, 

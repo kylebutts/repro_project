@@ -1,8 +1,5 @@
 ---
 title: "Main analysis script"
-format:
-  html:
-    keep-md: true
 ---
 
 
