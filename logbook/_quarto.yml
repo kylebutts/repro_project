@@ -1,12 +1,13 @@
 project:
   type: website
-  output-dir: ../docs/
+  pre-render: copy_readme.R
+
 
 website:
   title: "Logbook"
   sidebar: 
     contents: 
-      - index.qmd 
+      - "index.md"
       # Can specify file order here. 
       # See https://quarto.org/docs/websites/website-navigation.html
       - section: Cleaning
