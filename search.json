@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "cleaning/clean_census/readme.html",
-    "href": "cleaning/clean_census/readme.html",
-    "title": "Clean Census data",
-    "section": "",
-    "text": "Clean Census data\ncat(\"Cleaning data\")\nCleaning data"
-  },
-  {
-    "objectID": "analysis/main_analysis/readme.html",
-    "href": "analysis/main_analysis/readme.html",
-    "title": "Main analysis script",
-    "section": "",
-    "text": "Main analysis script\nThis is an example script that will be run by render_file and logged in the logbook.\n\n[!NOTE]\nNote that there are five types of callouts, including: note, warning, important, tip, and caution.\n\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\n1 + 1\n[1] 2\nplot(mtcars$mpg, mtcars$hp)\n\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n\nA knitr kable.\nest = feols(mpg ~ hp | cyl, mtcars)\nesttable(est)\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Paper Title",
@@ -53,13 +39,21 @@
     "href": "analysis/main_analysis/index.html",
     "title": "Main analysis script",
     "section": "",
-    "text": "This is an example script that will be run by render_file and logged in the logbook.\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, warning, important, tip, and caution.\n\n\n\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\n\n\n1 + 1\n\n[1] 2\n\n\n\nplot(mtcars$mpg, mtcars$hp)\n\n\n\n\n\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n\n\n\n\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\nesttable(est)\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "This is an example script that will be run by render_file and logged in the logbook.\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, warning, important, tip, and caution.\n\n\n\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\n\n\n1 + 1\n\n[1] 2\n\n\n\nplot(mtcars$mpg, mtcars$hp)\n\n\n\n\n\n\n\n\n\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n\n\n\n\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\nesttable(est)\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
+    "crumbs": [
+      "Analysis",
+      "Main analysis script"
+    ]
   },
   {
     "objectID": "cleaning/clean_census/index.html",
     "href": "cleaning/clean_census/index.html",
     "title": "Clean Census data",
     "section": "",
-    "text": "cat(\"Cleaning data\")\n\nCleaning data"
+    "text": "cat(\"Cleaning data\")\n\nCleaning data",
+    "crumbs": [
+      "Cleaning",
+      "Clean Census data"
+    ]
   }
 ]
