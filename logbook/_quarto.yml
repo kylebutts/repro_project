@@ -1,19 +1,13 @@
 project:
   type: website
   pre-render: copy_readme.R
-
+  render: 
+    - "**/index.md"
 
 website:
   title: "Logbook"
   sidebar: 
-    contents: 
-      - "index.md"
-      # Can specify file order here. 
-      # See https://quarto.org/docs/websites/website-navigation.html
-      - section: Cleaning
-        contents: "cleaning/**/index.md"
-      - section: Analysis
-        contents: "analysis/**/index.md"
+    contents: auto
 
 format:
   html:
