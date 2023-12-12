@@ -4,50 +4,48 @@
 
 # Reproducible Log Book
 
-The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using [quarto](https://quarto.org/). I want this to be additive, requiring *minimal* changes to your project. You don't need to change your project structure, change how you code, etc. Instead, you just need to do the following:
+The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using [quarto](https://quarto.org/). I want this to be additive, requiring *minimal* changes to your project. You don't need to change your project structure, change how you code, etc. 
 
-1. Copy the `logbook` folder to your project. This folder contains the `quarto` configuration and `render_file.R` which creates a function for running and logging a script. 
+Adding this to your project requires minimal changes to your code:
 
-2. You need to create a script similar to [`code/main.R`](https://github.com/kylebutts/repro_project/blob/main/code/main.R). This scripts will create the reproduction pipeline. This file is basically just a list of calls to `render_file()` instead of calls to `source()`. Calls should be ordered from top to bottom so that each file only depends on previously run scripts. 
-
-*NOTE:* When working on the project, you don't need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time. 
-
-
-## Directory Structure
-
-Here is the example directory structure. Note how the folder structure in `logbook` matches the folder structure in `code`. This handled by the `render_file()` function. 
-
-```
-.
-├── README.md
-├── code
-│   ├── analysis
-│   │   └── main_analysis.R
-│   ├── cleaning
-│   │   └── clean_census.R
-│   └── main.R
-└── logbook
-    ├── analysis
-    │   └── main_analysis
-    │       ├── index.md
-    │       ├── index_files
-    │       │   └── ...
-    │       └── readme.md
-    ├── cleaning
-    │   └── clean_census
-    │       ├── index.md
-    │       └── readme.md
-    ├── render_file.R
-    ├── _quarto.yml
-    ├── copy_readme.R
-    └── index.md
+```diff
+  .
+  ├── README.md
+  ├── ...
+  ├── code
+  │   ├── analysis
+  │   │   └── main_analysis.R
+  │   ├── cleaning
+  │   │   └── clean_census.R
++ │   └── main.R
++ └── logbook
++    ├── analysis
++    │   └── main_analysis
++    │       ├── index.md
++    │       ├── index_files
++    │       │   └── ...
++    │       └── readme.md
++    ├── cleaning
++    │   └── clean_census
++    │       ├── index.md
++    │       └── readme.md
++    ├── render_file.R
++    ├── _quarto.yml
++    ├── copy_readme.R
++    └── index.md
 ```
 
-Addtional files:
+First, add the `logbook` folder to your project. This folder contains the `quarto` configuration and `render_file.R` which creates a `render_file()` function for running and logging a script.
+
+Logbook contents:
 - `logbook/render_file.R` is the script that runs a script and logs it. More details below.
 - `logbook/_quarto.yml` is the quarto configuration file. You don't need to edit this.
 - `README.md` is the "front page" to your project. This shows up when you open the github repository. 
 - `logbook/copy_readme.R` gets run every time you use `quarto render` on the logbook to keep `index.md` up to date.
+
+Second, you need to create a script similar to [`code/main.R`](https://github.com/kylebutts/repro_project/blob/main/code/main.R). It can be located anywhere. This scripts will create the reproduction pipeline and is just a list of calls to `render_file()` for each file. Calls should be ordered from top to bottom so that each file only depends on previously run scripts (i.e., a reproducible pipeline). 
+
+*NOTE:* When working on the project, you don't need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time. 
 
 
 ## How `render_file()` works
