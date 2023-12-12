@@ -10,8 +10,7 @@ The goal of this project is to make it easy to create a reproducible logbook of 
 
 2. You need to create a script similar to [`code/main.R`](https://github.com/kylebutts/repro_project/blob/main/code/main.R). This scripts will create the reproduction pipeline. This file is basically just a list of calls to `render_file()` instead of calls to `source()`. Calls should be ordered from top to bottom so that each file only depends on previously run scripts. 
 
->[!NOTE]
-> When working on the project, you don't need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time. 
+*NOTE:* When working on the project, you don't need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time. 
 
 
 ## Directory Structure
