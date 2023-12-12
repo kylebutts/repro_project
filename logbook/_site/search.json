@@ -7,13 +7,6 @@
     "text": "View live example logbook"
   },
   {
-    "objectID": "index.html#directory-structure",
-    "href": "index.html#directory-structure",
-    "title": "Reproducible Log Book",
-    "section": "Directory Structure",
-    "text": "Directory Structure\nHere is the example directory structure. Note how the folder structure in logbook matches the folder structure in code. This handled by the render_file() function.\n.\n├── README.md\n├── code\n│   ├── analysis\n│   │   └── main_analysis.R\n│   ├── cleaning\n│   │   └── clean_census.R\n│   └── main.R\n└── logbook\n    ├── analysis\n    │   └── main_analysis\n    │       ├── index.md\n    │       ├── index_files\n    │       │   └── ...\n    │       └── readme.md\n    ├── cleaning\n    │   └── clean_census\n    │       ├── index.md\n    │       └── readme.md\n    ├── render_file.R\n    ├── _quarto.yml\n    ├── copy_readme.R\n    └── index.md\nAddtional files: - logbook/render_file.R is the script that runs a script and logs it. More details below. - logbook/_quarto.yml is the quarto configuration file. You don’t need to edit this. - README.md is the “front page” to your project. This shows up when you open the github repository. - logbook/copy_readme.R gets run every time you use quarto render on the logbook to keep index.md up to date."
-  },
-  {
     "objectID": "index.html#how-render_file-works",
     "href": "index.html#how-render_file-works",
     "title": "Reproducible Log Book",

@@ -185,7 +185,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#reproducible-log-book" id="toc-reproducible-log-book" class="nav-link active" data-scroll-target="#reproducible-log-book">Reproducible Log Book</a>
   <ul class="collapse">
-  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure</a></li>
   <li><a href="#how-render_file-works" id="toc-how-render_file-works" class="nav-link" data-scroll-target="#how-render_file-works">How <code>render_file()</code> works</a>
   <ul class="collapse">
   <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
@@ -214,42 +213,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="reproducible-log-book" class="level1">
 <h1>Reproducible Log Book</h1>
-<p>The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using <a href="https://quarto.org/">quarto</a>. I want this to be additive, requiring <em>minimal</em> changes to your project. You don’t need to change your project structure, change how you code, etc. Instead, you just need to do the following:</p>
-<ol type="1">
-<li><p>Copy the <code>logbook</code> folder to your project. This folder contains the <code>quarto</code> configuration and <code>render_file.R</code> which creates a function for running and logging a script.</p></li>
-<li><p>You need to create a script similar to <a href="https://github.com/kylebutts/repro_project/blob/main/code/main.R"><code>code/main.R</code></a>. This scripts will create the reproduction pipeline. This file is basically just a list of calls to <code>render_file()</code> instead of calls to <code>source()</code>. Calls should be ordered from top to bottom so that each file only depends on previously run scripts.</p></li>
-</ol>
-<blockquote class="blockquote">
-<p>[!NOTE] When working on the project, you don’t need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time.</p>
-</blockquote>
-<section id="directory-structure" class="level2">
-<h2 class="anchored" data-anchor-id="directory-structure">Directory Structure</h2>
-<p>Here is the example directory structure. Note how the folder structure in <code>logbook</code> matches the folder structure in <code>code</code>. This handled by the <code>render_file()</code> function.</p>
-<pre><code>.
-├── README.md
-├── code
-│   ├── analysis
-│   │   └── main_analysis.R
-│   ├── cleaning
-│   │   └── clean_census.R
-│   └── main.R
-└── logbook
-    ├── analysis
-    │   └── main_analysis
-    │       ├── index.md
-    │       ├── index_files
-    │       │   └── ...
-    │       └── readme.md
-    ├── cleaning
-    │   └── clean_census
-    │       ├── index.md
-    │       └── readme.md
-    ├── render_file.R
-    ├── _quarto.yml
-    ├── copy_readme.R
-    └── index.md</code></pre>
-<p>Addtional files: - <code>logbook/render_file.R</code> is the script that runs a script and logs it. More details below. - <code>logbook/_quarto.yml</code> is the quarto configuration file. You don’t need to edit this. - <code>README.md</code> is the “front page” to your project. This shows up when you open the github repository. - <code>logbook/copy_readme.R</code> gets run every time you use <code>quarto render</code> on the logbook to keep <code>index.md</code> up to date.</p>
-</section>
+<p>The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using <a href="https://quarto.org/">quarto</a>. I want this to be additive, requiring <em>minimal</em> changes to your project. You don’t need to change your project structure, change how you code, etc.</p>
+<p>Adding this to your project requires minimal changes to your code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff code-with-copy"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  .</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  ├── README.md</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ├── ...</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  ├── code</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  │   ├── analysis</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  │   │   └── main_analysis.R</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  │   ├── cleaning</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  │   │   └── clean_census.R</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="va">+ │   └── main.R</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="va">+ └── logbook</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="va">+    ├── analysis</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="va">+    │   └── main_analysis</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       ├── index.md</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       ├── index_files</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       │   └── ...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       └── readme.md</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="va">+    ├── cleaning</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="va">+    │   └── clean_census</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       ├── index.md</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="va">+    │       └── readme.md</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="va">+    ├── render_file.R</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="va">+    ├── _quarto.yml</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="va">+    ├── copy_readme.R</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="va">+    └── index.md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First, add the <code>logbook</code> folder to your project. This folder contains the <code>quarto</code> configuration and <code>render_file.R</code> which creates a <code>render_file()</code> function for running and logging a script.</p>
+<p>Logbook contents: - <code>logbook/render_file.R</code> is the script that runs a script and logs it. More details below. - <code>logbook/_quarto.yml</code> is the quarto configuration file. You don’t need to edit this. - <code>README.md</code> is the “front page” to your project. This shows up when you open the github repository. - <code>logbook/copy_readme.R</code> gets run every time you use <code>quarto render</code> on the logbook to keep <code>index.md</code> up to date.</p>
+<p>Second, you need to create a script similar to <a href="https://github.com/kylebutts/repro_project/blob/main/code/main.R"><code>code/main.R</code></a>. It can be located anywhere. This scripts will create the reproduction pipeline and is just a list of calls to <code>render_file()</code> for each file. Calls should be ordered from top to bottom so that each file only depends on previously run scripts (i.e., a reproducible pipeline).</p>
+<p><em>NOTE:</em> When working on the project, you don’t need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time.</p>
 <section id="how-render_file-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-render_file-works">How <code>render_file()</code> works</h2>
 <p>The <code>render_file()</code> is basically a light wrapper around <a href="https://quarto.org/docs/prerelease/1.4/script.html"><code>quarto::quarto_render()</code></a>. What it does is as follows:</p>
