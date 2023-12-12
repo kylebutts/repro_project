@@ -60,7 +60,7 @@ The `render_file()` is basically a light wrapper around [`quarto::quarto_render(
 
 You can think of the `render_file()` as wrapping your code in one giant `.qmd` code chunk: 
 `````
-```{r}
+``` r
 ...
 ```
 `````
@@ -72,7 +72,7 @@ However, you can do anything you can in a `.qmd` file in a plain script...
 There is much more customization power possible using the `# %%` syntax. See for example, [`code/analysis/main_analysis.R`](https://github.com/kylebutts/repro_project/blob/main/code/analysis/main_analysis.R). This syntax is used in `.jl`/`.py`/`.R` files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up `cmd + shift + enter`).
 
 When using `render_file()` (or `quarto::quarto_render()` directly), the `# %%` is converted to it's own code cell and you can pass options to it just like in `.qmd` files, e.g.:
-```r
+```
 # %% Chunk label
 #| echo: false
 #| warning: false
