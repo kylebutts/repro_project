@@ -43,7 +43,7 @@ render_file <- function(file, out_base_dir = "logbook", code_base_dir = "code") 
   txt = xfun::read_utf8(here::here(file))
   
   # Convert # Header ---- to #' ## Header
-  regex_header = "^(#{1,})\\s(.*)-{4,}"
+  regex_header = "^(#{1,}) (.*?)-{4,}"
   txt = gsub(
     regex_header, 
     "#' \\1# \\2", 
