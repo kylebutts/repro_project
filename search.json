@@ -2,37 +2,37 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Paper Title",
+    "title": "Reproducible Log Book",
     "section": "",
     "text": "View live example logbook"
   },
   {
+    "objectID": "index.html#directory-structure",
+    "href": "index.html#directory-structure",
+    "title": "Reproducible Log Book",
+    "section": "Directory Structure",
+    "text": "Directory Structure\nHere is the example directory structure. Note how the folder structure in logbook matches the folder structure in code. This handled by the render_file() function.\n.\n├── README.md\n├── code\n│   ├── analysis\n│   │   └── main_analysis.R\n│   ├── cleaning\n│   │   └── clean_census.R\n│   └── main.R\n└── logbook\n    ├── analysis\n    │   └── main_analysis\n    │       ├── index.md\n    │       ├── index_files\n    │       │   └── ...\n    │       └── readme.md\n    ├── cleaning\n    │   └── clean_census\n    │       ├── index.md\n    │       └── readme.md\n    ├── render_file.R\n    ├── _quarto.yml\n    ├── copy_readme.R\n    └── index.md\nAddtional files: - logbook/render_file.R is the script that runs a script and logs it. More details below. - logbook/_quarto.yml is the quarto configuration file. You don’t need to edit this. - README.md is the “front page” to your project. This shows up when you open the github repository. - logbook/copy_readme.R gets run every time you use quarto render on the logbook to keep index.md up to date."
+  },
+  {
+    "objectID": "index.html#how-render_file-works",
+    "href": "index.html#how-render_file-works",
+    "title": "Reproducible Log Book",
+    "section": "How render_file() works",
+    "text": "How render_file() works\nThe render_file() is basically a light wrapper around quarto::quarto_render(). What it does is as follows:\n\nIt takes a .R file (.py/.jl soon!), converts it to a .qmd file. See the YAML Frontmatter section for important details.\nIt renders the .qmd file to a index.md and to readme.md in the logbook folder. The index.md is what becomes the html page and the readme.md is what shows up on GitHub. This only requires rendering the script once.\n\nYou can think of the render_file() as wrapping your code in one giant .qmd code chunk:\n``` r\n...\n```\nHowever, you can do anything you can in a .qmd file in a plain script…\n\nCode chunks\nThere is much more customization power possible using the # %% syntax. See for example, code/analysis/main_analysis.R. This syntax is used in .jl/.py/.R files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up cmd + shift + enter).\nWhen using render_file() (or quarto::quarto_render() directly), the # %% is converted to it’s own code cell and you can pass options to it just like in .qmd files, e.g.:\n# %% Chunk label\n#| echo: false\n#| warning: false\n\n\nAdding markdown into script\nTo insert markdown directly into your document (so that you can comment on your code):\n\nIn .R, use roxygen style comments like this:\n\n#' # Header\n#'\n#' Markdown text\n\nIn .py/.jl, use raw string literals like this:\n\n# %% [markdown]\n\"\"\"\n# Header\n\nMarkdown text\n\"\"\"\n\n\nYAML Frontmatter\nThe only modification to your file is you need to include yaml frontmatter at the top of your script. Note, you don’t need to pass format since render_file handles this.\nYou can add yaml frontmatter as a comment markdown like above.\n\nIn .R:\n\n#' ---\n#' title: ''\n#' ---\n\nIn .py/.jl:\n\n# %% [markdown]\n\"\"\"\n---\ntitle: ''\n---\n\"\"\"\n\n\nDeploying logbook\nThe logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since logbook is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.\n\n\nTODOS\n\nAutomatically add YAML frontmatter with title: 'script_name' if yaml is missing.\nAdd support for .py and .jl files.\n\nPRs welcome!"
+  },
+  {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
-    "title": "Paper Title",
+    "title": "Reproducible Log Book",
     "section": "Abstract",
     "text": "Abstract\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
   },
   {
     "objectID": "index.html#citation",
     "href": "index.html#citation",
-    "title": "Paper Title",
+    "title": "Reproducible Log Book",
     "section": "Citation",
     "text": "Citation\n@techreport{key,\n  title={Paper Title},\n  author={Butts, Kyle},\n  year={20XX}\n}"
-  },
-  {
-    "objectID": "index.html#directory-structure",
-    "href": "index.html#directory-structure",
-    "title": "Paper Title",
-    "section": "Directory structure",
-    "text": "Directory structure\nThis is the structure of a project that I’m really happy with. I do all my coding in the code/ folder using basic .R files and the # %% syntax for code chunks (I do not really like working in .qmd files). However, I like the ability to run something and produce a log of graphs/output/tables that I run. This is good for sharing with coauthors and the reports can be run to make sure that the output is still the same.\nThe # %% style actually converts to a .qmd file with the knitr::spin() command (see details in the R Markdown Cookbook). I have a script render_file.R that takes .R files in the code/ folder and converts them to .qmd scripts and then renders them to a .md file in the logbook/ folder, following the same folder structure as in code/.\nThe logbook is a quarto website that lets you view the log in a nice website (see the live example above). This produces an index.md which will render to html and a readme.md which will be viewable on github. It can be deployed in various ways: https://quarto.org/docs/output-formats/html-publishing.html."
-  },
-  {
-    "objectID": "index.html#codemain.r",
-    "href": "index.html#codemain.r",
-    "title": "Paper Title",
-    "section": "code/main.R",
-    "text": "code/main.R\nThe file code/main.R is the reproduction starting point. I write the files in the order they would need to be run to completely redo the analysis. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts.\nWhen working on the project, you don’t need to rerun everything to update the logbook, but it’s good to check that everything is reproducible from time to time."
   },
   {
     "objectID": "analysis/main_analysis/index.html",

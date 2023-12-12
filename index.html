@@ -177,15 +177,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#paper-title" id="toc-paper-title" class="nav-link active" data-scroll-target="#paper-title">Paper Title</a>
+  <li><a href="#reproducible-log-book" id="toc-reproducible-log-book" class="nav-link active" data-scroll-target="#reproducible-log-book">Reproducible Log Book</a>
+  <ul class="collapse">
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure</a></li>
+  <li><a href="#how-render_file-works" id="toc-how-render_file-works" class="nav-link" data-scroll-target="#how-render_file-works">How <code>render_file()</code> works</a>
+  <ul class="collapse">
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
+  <li><a href="#adding-markdown-into-script" id="toc-adding-markdown-into-script" class="nav-link" data-scroll-target="#adding-markdown-into-script">Adding markdown into script</a></li>
+  <li><a href="#yaml-frontmatter" id="toc-yaml-frontmatter" class="nav-link" data-scroll-target="#yaml-frontmatter">YAML Frontmatter</a></li>
+  <li><a href="#deploying-logbook" id="toc-deploying-logbook" class="nav-link" data-scroll-target="#deploying-logbook">Deploying logbook</a></li>
+  <li><a href="#todos" id="toc-todos" class="nav-link" data-scroll-target="#todos">TODOS</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#paper-title" id="toc-paper-title" class="nav-link" data-scroll-target="#paper-title">Paper Title</a>
   <ul class="collapse">
   <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
-  </ul></li>
-  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link" data-scroll-target="#about-this-project">About this project</a>
-  <ul class="collapse">
-  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory structure</a></li>
-  <li><a href="#codemain.r" id="toc-codemain.r" class="nav-link" data-scroll-target="#codemain.r"><code>code/main.R</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -195,7 +202,121 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><a href="https://kylebutts.github.io/repro_project"><strong>View live example logbook</strong></a></p>
+<div class="center">
+<p><a href="https://kylebutts.github.io/repro_project"><b>View live example logbook</b></a></p>
+</div>
+<section id="reproducible-log-book" class="level1">
+<h1>Reproducible Log Book</h1>
+<p>The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using <a href="https://quarto.org/">quarto</a>. I want this to be additive, requiring <em>minimal</em> changes to your project. You don’t need to change your project structure, change how you code, etc. Instead, you just need to do the following:</p>
+<ol type="1">
+<li><p>Copy the <code>logbook</code> folder to your project. This folder contains the <code>quarto</code> configuration and <code>render_file.R</code> which creates a function for running and logging a script.</p></li>
+<li><p>You need to create a script similar to <a href="https://github.com/kylebutts/repro_project/blob/main/code/main.R"><code>code/main.R</code></a>. This scripts will create the reproduction pipeline. This file is basically just a list of calls to <code>render_file()</code> instead of calls to <code>source()</code>. Calls should be ordered from top to bottom so that each file only depends on previously run scripts.</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>[!NOTE] When working on the project, you don’t need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time.</p>
+</blockquote>
+<section id="directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="directory-structure">Directory Structure</h2>
+<p>Here is the example directory structure. Note how the folder structure in <code>logbook</code> matches the folder structure in <code>code</code>. This handled by the <code>render_file()</code> function.</p>
+<pre><code>.
+├── README.md
+├── code
+│   ├── analysis
+│   │   └── main_analysis.R
+│   ├── cleaning
+│   │   └── clean_census.R
+│   └── main.R
+└── logbook
+    ├── analysis
+    │   └── main_analysis
+    │       ├── index.md
+    │       ├── index_files
+    │       │   └── ...
+    │       └── readme.md
+    ├── cleaning
+    │   └── clean_census
+    │       ├── index.md
+    │       └── readme.md
+    ├── render_file.R
+    ├── _quarto.yml
+    ├── copy_readme.R
+    └── index.md</code></pre>
+<p>Addtional files: - <code>logbook/render_file.R</code> is the script that runs a script and logs it. More details below. - <code>logbook/_quarto.yml</code> is the quarto configuration file. You don’t need to edit this. - <code>README.md</code> is the “front page” to your project. This shows up when you open the github repository. - <code>logbook/copy_readme.R</code> gets run every time you use <code>quarto render</code> on the logbook to keep <code>index.md</code> up to date.</p>
+</section>
+<section id="how-render_file-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-render_file-works">How <code>render_file()</code> works</h2>
+<p>The <code>render_file()</code> is basically a light wrapper around <a href="https://quarto.org/docs/prerelease/1.4/script.html"><code>quarto::quarto_render()</code></a>. What it does is as follows:</p>
+<ol type="1">
+<li>It takes a <code>.R</code> file (<code>.py</code>/<code>.jl</code> soon!), converts it to a <code>.qmd</code> file. See the YAML Frontmatter section for important details.</li>
+<li>It renders the <code>.qmd</code> file to a <code>index.md</code> and to <code>readme.md</code> in the logbook folder. The <code>index.md</code> is what becomes the html page and the <code>readme.md</code> is what shows up on GitHub. This only requires rendering the script once.</li>
+</ol>
+<p>You can think of the <code>render_file()</code> as wrapping your code in one giant <code>.qmd</code> code chunk:</p>
+<pre><code>``` r
+...
+```</code></pre>
+<p>However, you can do anything you can in a <code>.qmd</code> file in a plain script…</p>
+<section id="code-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
+<p>There is much more customization power possible using the <code># %%</code> syntax. See for example, <a href="https://github.com/kylebutts/repro_project/blob/main/code/analysis/main_analysis.R"><code>code/analysis/main_analysis.R</code></a>. This syntax is used in <code>.jl</code>/<code>.py</code>/<code>.R</code> files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up <code>cmd + shift + enter</code>).</p>
+<p>When using <code>render_file()</code> (or <code>quarto::quarto_render()</code> directly), the <code># %%</code> is converted to it’s own code cell and you can pass options to it just like in <code>.qmd</code> files, e.g.:</p>
+<pre><code># %% Chunk label
+#| echo: false
+#| warning: false</code></pre>
+</section>
+<section id="adding-markdown-into-script" class="level3">
+<h3 class="anchored" data-anchor-id="adding-markdown-into-script">Adding markdown into script</h3>
+<p>To insert markdown directly into your document (so that you can comment on your code):</p>
+<ul>
+<li>In <code>.R</code>, use roxygen style comments like this:</li>
+</ul>
+<pre><code>#' # Header
+#'
+#' Markdown text</code></pre>
+<ul>
+<li>In <code>.py</code>/<code>.jl</code>, use raw string literals like this:</li>
+</ul>
+<pre><code># %% [markdown]
+"""
+# Header
+
+Markdown text
+"""</code></pre>
+</section>
+<section id="yaml-frontmatter" class="level3">
+<h3 class="anchored" data-anchor-id="yaml-frontmatter">YAML Frontmatter</h3>
+<p>The only modification to your file is you need to include yaml frontmatter at the <em>top of your script</em>. Note, you don’t need to pass <code>format</code> since <code>render_file</code> handles this.</p>
+<p>You can add yaml frontmatter as a comment markdown like above.</p>
+<ul>
+<li>In <code>.R</code>:</li>
+</ul>
+<pre><code>#' ---
+#' title: ''
+#' ---</code></pre>
+<ul>
+<li>In <code>.py</code>/<code>.jl</code>:</li>
+</ul>
+<pre><code># %% [markdown]
+"""
+---
+title: ''
+---
+"""</code></pre>
+</section>
+<section id="deploying-logbook" class="level3">
+<h3 class="anchored" data-anchor-id="deploying-logbook">Deploying logbook</h3>
+<p>The logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since <code>logbook</code> is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.</p>
+</section>
+<section id="todos" class="level3">
+<h3 class="anchored" data-anchor-id="todos">TODOS</h3>
+<ol type="1">
+<li>Automatically add YAML frontmatter with <code>title: 'script_name'</code> if yaml is missing.</li>
+<li>Add support for <code>.py</code> and <code>.jl</code> files.</li>
+</ol>
+<p>PRs welcome!</p>
+<hr>
+</section>
+</section>
+</section>
 <section id="paper-title" class="level1">
 <h1>Paper Title</h1>
 <p><a href="https://www.kylebutts.com/">Kyle Butts</a><sup>1</sup></p>
@@ -207,25 +328,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="citation" class="level2">
 <h2 class="anchored" data-anchor-id="citation">Citation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bib code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@techreport</span>{<span class="ot">key</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={Paper Title},</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Butts, Kyle},</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={20XX}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="about-this-project" class="level1">
-<h1>About this project</h1>
-<section id="directory-structure" class="level2">
-<h2 class="anchored" data-anchor-id="directory-structure">Directory structure</h2>
-<p>This is the structure of a project that I’m really happy with. I do all my coding in the <code>code/</code> folder using basic <code>.R</code> files and the <code># %%</code> syntax for code chunks (I do not really like working in <code>.qmd</code> files). However, I like the ability to run something and produce a log of graphs/output/tables that I run. This is good for sharing with coauthors and the reports can be run to make sure that the output is still the same.</p>
-<p>The <code># %%</code> style actually converts to a <code>.qmd</code> file with the <code>knitr::spin()</code> command (see details in the <a href="https://bookdown.org/yihui/rmarkdown-cookbook/spin.html">R Markdown Cookbook</a>). I have a script <code>render_file.R</code> that takes <code>.R</code> files in the <code>code/</code> folder and converts them to <code>.qmd</code> scripts and then renders them to a <code>.md</code> file in the <code>logbook/</code> folder, following the same folder structure as in <code>code/</code>.</p>
-<p>The logbook is a quarto website that lets you view the log in a nice website (see the live example above). This produces an <code>index.md</code> which will render to html and a <code>readme.md</code> which will be viewable on github. It can be deployed in various ways: https://quarto.org/docs/output-formats/html-publishing.html.</p>
-</section>
-<section id="codemain.r" class="level2">
-<h2 class="anchored" data-anchor-id="codemain.r"><code>code/main.R</code></h2>
-<p>The file <a href="https://github.com/kylebutts/repro_project/blob/main/code/main.R"><code>code/main.R</code></a> is the reproduction starting point. I write the files in the order they would need to be run to <em>completely</em> redo the analysis. Files are run in order from top to bottom, so you should structure it in a way where each file only depends on previously run scripts.</p>
-<p>When working on the project, you don’t need to rerun everything to update the logbook, but it’s good to check that everything is reproducible from time to time.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bib code-with-copy"><code class="sourceCode bibtex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">@techreport</span>{<span class="ot">key</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>={Paper Title},</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>={Butts, Kyle},</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">year</span>={20XX}</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
