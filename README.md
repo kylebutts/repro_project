@@ -50,10 +50,9 @@ Second, you need to create a script similar to [`code/main.R`](https://github.co
 
 ## How `render_file()` works
 
-The `render_file()` is basically a light wrapper around [`quarto::quarto_render()`](https://quarto.org/docs/prerelease/1.4/script.html). What it does is as follows:
+The `render_file()` is basically a light wrapper around [`quarto::quarto_render()`](https://quarto.org/docs/prerelease/1.4/script.html).
 
-1. It takes a `.R` file (`.py`/`.jl` soon!), converts it to a `.qmd` file. See the YAML Frontmatter section for important details.
-2. It renders the `.qmd` file to a `index.md` and to `readme.md` in the logbook folder. The `index.md` is what becomes the html page and the `readme.md` is what shows up on GitHub. This only requires rendering the script once.
+This function takes a `.R`/`.py`/`.jl` script and renders it to a markdown log in the logbook folder. The `index.md` is what becomes the html page and the `readme.md` is what shows up on GitHub. #' This function renders the file only one time and points to the same files (e.g. any plots created), so the memory and compute costs of two versions is minimal. 
 
 You can think of the `render_file()` as wrapping your code in one giant `.qmd` code chunk: 
 `````
@@ -62,7 +61,7 @@ You can think of the `render_file()` as wrapping your code in one giant `.qmd` c
 ```
 `````
 
-However, you can do anything you can in a `.qmd` file in a plain script... 
+However, you can break your code up into chunks and write markdown right within the file. This isn't great for writing a paper, but it's great for small comments you want to display. Think of it like commenting your code in a way that presents nicely. 
 
 ### Code chunks
 
@@ -98,7 +97,8 @@ Markdown text
 
 
 ### YAML Frontmatter
-The only modification to your file is you need to include yaml frontmatter at the *top of your script*. Note, you don't need to pass `format` since `render_file` handles this. 
+
+To render a script, quarto requires yaml frontmatter at the *top of your script*. The `render_file` script will insert a default one with a title field if it is not detected. The title will be based on the file name (e.g. `run_regressions.R` -> `Run Regressions`). *Note: you don't need to pass `format` since `render_file` handles this* 
 
 You can add yaml frontmatter as a comment markdown like above. 
 
@@ -112,11 +112,9 @@ You can add yaml frontmatter as a comment markdown like above.
 - In `.py`/`.jl`:
 ```
 # %% [markdown]
-"""
----
-title: ''
----
-"""
+# ---
+# title: 'Great title'
+# ---
 ```
 
 
@@ -124,13 +122,9 @@ title: ''
 
 The logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since `logbook` is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.
 
+### README.md
 
-### TODOS
-
-1. Automatically add YAML frontmatter with `title: 'script_name'` if yaml is missing.
-2. Add support for `.py` and `.jl` files.
-
-PRs welcome!
+At the base of your project (not the logbook), you should have a `README.md` file for your project. This file is copied over to the front page of the logbook via the `copy_readme.R` script. Below is a template that I use in my projects.
 
 
 ---
