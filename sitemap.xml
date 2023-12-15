@@ -2,14 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/kylebutts/repro_project/index.html</loc>
-    <lastmod>2023-12-12T14:54:00.294Z</lastmod>
+    <lastmod>2023-12-15T16:21:10.319Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kylebutts/repro_project/analysis/python_code/index.html</loc>
+    <lastmod>2023-12-15T16:21:09.391Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/kylebutts/repro_project/analysis/main_analysis/index.html</loc>
-    <lastmod>2023-12-12T14:53:59.062Z</lastmod>
+    <lastmod>2023-12-15T16:21:08.615Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/kylebutts/repro_project/analysis/plot_in_julia/index.html</loc>
+    <lastmod>2023-12-15T16:21:09.147Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/kylebutts/repro_project/cleaning/clean_census/index.html</loc>
-    <lastmod>2023-12-12T14:53:59.718Z</lastmod>
+    <lastmod>2023-12-15T16:21:09.771Z</lastmod>
   </url>
 </urlset>
