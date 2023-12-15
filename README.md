@@ -38,7 +38,7 @@ Adding this to your project requires minimal changes to your code:
 First, add the `logbook` folder to your project. This folder contains the `quarto` configuration and `render_file.R` which creates a `render_file()` function for running and logging a script.
 
 Logbook contents:
-- `logbook/render_file.R` is the script that runs a script and logs it. More details below.
+- `logbook/render_file.R` creates the `render_file()` function for logging script files. More details below.
 - `logbook/_quarto.yml` is the quarto configuration file. You don't need to edit this.
 - `README.md` is the "front page" to your project. This shows up when you open the github repository. 
 - `logbook/copy_readme.R` gets run every time you use `quarto render` on the logbook to keep `index.md` up to date.
