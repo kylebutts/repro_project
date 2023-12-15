@@ -8,7 +8,7 @@ The goal of this project is to make it easy to create a reproducible logbook of 
 
 Adding this to your project requires minimal changes to your code:
 
-```diff
+``` diff
   .
   ├── README.md
   ├── ...
@@ -55,7 +55,7 @@ The `render_file()` is basically a light wrapper around [`quarto::quarto_render(
 This function takes a `.R`/`.py`/`.jl` script and renders it to a markdown log in the logbook folder. The `index.md` is what becomes the html page and the `readme.md` is what shows up on GitHub. #' This function renders the file only one time and points to the same files (e.g. any plots created), so the memory and compute costs of two versions is minimal. 
 
 You can think of the `render_file()` as wrapping your code in one giant `.qmd` code chunk: 
-`````
+````` md
 ``` r
 ...
 ```
@@ -68,7 +68,7 @@ However, you can break your code up into chunks and write markdown right within 
 There is much more customization power possible using the `# %%` syntax. See for example, [`code/analysis/main_analysis.R`](https://github.com/kylebutts/repro_project/blob/main/code/analysis/main_analysis.R). This syntax is used in `.jl`/`.py`/`.R` files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up `cmd + shift + enter`).
 
 When using `render_file()` (or `quarto::quarto_render()` directly), the `# %%` is converted to it's own code cell and you can pass options to it just like in `.qmd` files, e.g.:
-```
+``` r
 # %% Chunk label
 #| echo: false
 #| warning: false
@@ -79,14 +79,14 @@ When using `render_file()` (or `quarto::quarto_render()` directly), the `# %%` i
 To insert markdown directly into your document (so that you can comment on your code):
 
 - In `.R`, use roxygen style comments like this:
-```
+``` r
 #' # Header
 #'
 #' Markdown text
 ```
 
 - In `.py`/`.jl`, use raw string literals like this:
-```
+``` py
 # %% [markdown]
 """
 # Header
@@ -95,7 +95,6 @@ Markdown text
 """
 ```
 
-
 ### YAML Frontmatter
 
 To render a script, quarto requires yaml frontmatter at the *top of your script*. The `render_file` script will insert a default one with a title field if it is not detected. The title will be based on the file name (e.g. `run_regressions.R` -> `Run Regressions`). *Note: you don't need to pass `format` since `render_file` handles this* 
@@ -103,14 +102,14 @@ To render a script, quarto requires yaml frontmatter at the *top of your script*
 You can add yaml frontmatter as a comment markdown like above. 
 
 - In `.R`: 
-```
+``` r
 #' ---
 #' title: ''
 #' ---
 ```
 
 - In `.py`/`.jl`:
-```
+``` py
 # %% [markdown]
 # ---
 # title: 'Great title'
