@@ -8,7 +8,7 @@ The goal of this project is to make it easy to create a reproducible logbook of 
 
 Adding this to your project requires minimal changes to your code:
 
-``` diff
+```diff
   .
   ├── README.md
   ├── ...
