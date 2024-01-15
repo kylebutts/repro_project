@@ -5,6 +5,7 @@
 docs/*
 **/.quarto/
 **/site_libs/
+**/_site/*
 
 # R files
 .Rhistory

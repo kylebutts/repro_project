@@ -15,15 +15,21 @@ library(fixest)
 
 ``` r
 1 + 1
+mean(rnorm(1000))
 ```
 
     [1] 2
+    [1] -0.007644191
+
+## Plots
 
 ``` r
 plot(mtcars$mpg, mtcars$hp)
 ```
 
 <img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+## Tables
 
 ``` r
 knitr::kable(
@@ -41,6 +47,8 @@ knitr::kable(
 | Hornet Sportabout | 18.7 |   8 |  360 | 175 | 3.15 | 3.440 | 17.02 |   0 |   0 |    3 |    2 |
 
 A knitr kable.
+
+## Regression
 
 ``` r
 est = feols(mpg ~ hp | cyl, mtcars)

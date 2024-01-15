@@ -289,5 +289,5 @@ render_file <- function(
     )
   }
 
-  return(invisible(NULL))
+  return(invisible(TRUE))
 }

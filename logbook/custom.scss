@@ -1,0 +1,13 @@
+/*-- scss:rules --*/
+.cell-output pre {
+  // background-color: $code-block-bg-color;
+  // border: 1px solid $code-block-bg-color;
+  // border-radius: $border-radius;
+  border-left: 2px solid rgba(red($code-block-bg-color), green($code-block-bg-color), blue($code-block-bg-color), 1);
+  padding: $code-block-bg-padding;
+}
+
+main.content > section:first-of-type > h2:first-child {
+  margin-top: 2rem;
+}
+

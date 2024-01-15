@@ -17,17 +17,22 @@ library(tidyverse, warn.conflicts = FALSE)
 library(fixest)
 
 # %% 
+#| results: 'hold'
 1 + 1
+mean(rnorm(1000))
 
+#' ## Plots
 # %% 
 plot(mtcars$mpg, mtcars$hp)
 
+#' ## Tables
 # %% 
 knitr::kable(
   mtcars[1:5, ], 
   caption = "A knitr kable."
 )
 
+#' ## Regression
 # %%
 est = feols(mpg ~ hp | cyl, mtcars)
 

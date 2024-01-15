@@ -1,5 +1,6 @@
 ---
 title: "Main analysis script"
+description: "Conducts simple main analysis"
 ---
 
 
@@ -24,17 +25,23 @@ library(fixest)
 
 ```{.r .cell-code}
 1 + 1
+mean(rnorm(1000))
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 [1] 2
+[1] -0.007644191
 ```
 
 
 :::
 :::
+
+
+## Plots
+
 
 ::: {.cell}
 
@@ -46,6 +53,10 @@ plot(mtcars$mpg, mtcars$hp)
 ![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}
 :::
 :::
+
+
+## Tables
+
 
 ::: {.cell}
 
@@ -72,6 +83,10 @@ Table: A knitr kable.
 
 :::
 :::
+
+
+## Regression
+
 
 ::: {.cell}
 

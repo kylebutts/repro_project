@@ -1,8 +1,8 @@
+# Reproducible Log Book
+
 <div class="center">
   <a href='https://kylebutts.github.io/repro_project'><b>View live example logbook</b></a>
 </div>
-
-# Reproducible Log Book
 
 The goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using [quarto](https://quarto.org/). I want this to be additive, requiring *minimal* changes to your project. You don't need to change your project structure, change how you code, etc. 
 
