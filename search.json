@@ -32,76 +32,48 @@
     "href": "analysis/python_code/index.html",
     "title": "Python",
     "section": "",
-    "text": "Code\n1 + 1\n\n\n2",
-    "crumbs": [
-      "Analysis",
-      "Python"
-    ]
+    "text": "Code\n1 + 1\n\n\n2"
   },
   {
     "objectID": "analysis/main_analysis/index.html",
     "href": "analysis/main_analysis/index.html",
     "title": "Main analysis script",
     "section": "",
-    "text": "This is an example script that will be run by render_file and logged in the logbook.\nCode\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\nCode\n1 + 1\nmean(rnorm(1000))\n\n\n[1] 2\n[1] -0.007644191",
-    "crumbs": [
-      "Analysis",
-      "Main analysis script"
-    ]
+    "text": "This is an example script that will be run by render_file and logged in the logbook.\nCode\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\nCode\n1 + 1\nmean(rnorm(1000))\n\n\n[1] 2\n[1] -0.007644191"
   },
   {
     "objectID": "analysis/main_analysis/index.html#plots",
     "href": "analysis/main_analysis/index.html#plots",
     "title": "Main analysis script",
     "section": "Plots",
-    "text": "Plots\n\n\nCode\nplot(mtcars$mpg, mtcars$hp)",
-    "crumbs": [
-      "Analysis",
-      "Main analysis script"
-    ]
+    "text": "Plots\n\n\nCode\nplot(mtcars$mpg, mtcars$hp)"
   },
   {
     "objectID": "analysis/main_analysis/index.html#tables",
     "href": "analysis/main_analysis/index.html#tables",
     "title": "Main analysis script",
     "section": "Tables",
-    "text": "Tables\n\n\nCode\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2",
-    "crumbs": [
-      "Analysis",
-      "Main analysis script"
-    ]
+    "text": "Tables\n\n\nCode\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2"
   },
   {
     "objectID": "analysis/main_analysis/index.html#regression",
     "href": "analysis/main_analysis/index.html#regression",
     "title": "Main analysis script",
     "section": "Regression",
-    "text": "Regression\n\n\nCode\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\n\n\nCode\nesttable(est)\n\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
-    "crumbs": [
-      "Analysis",
-      "Main analysis script"
-    ]
+    "text": "Regression\n\n\nCode\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\n\n\nCode\nesttable(est)\n\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "analysis/plot_in_julia/index.html",
     "href": "analysis/plot_in_julia/index.html",
     "title": "Plot In Julia",
     "section": "",
-    "text": "Code\nusing Plots\n\nx = -3:0.01:3\nplot(x, sin.(x), label=\"sin(x)\")",
-    "crumbs": [
-      "Analysis",
-      "Plot In Julia"
-    ]
+    "text": "Code\nusing Plots\n\nx = -3:0.01:3\nplot(x, sin.(x), label=\"sin(x)\")"
   },
   {
     "objectID": "cleaning/clean_census/index.html",
     "href": "cleaning/clean_census/index.html",
     "title": "Clean Census data",
     "section": "",
-    "text": "Code\ncat(\"Cleaning data\")\n\n\nCleaning data",
-    "crumbs": [
-      "Cleaning",
-      "Clean Census data"
-    ]
+    "text": "Code\ncat(\"Cleaning data\")\n\n\nCleaning data"
   }
 ]
