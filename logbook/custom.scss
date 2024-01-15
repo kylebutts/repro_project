@@ -11,3 +11,19 @@ main.content > section:first-of-type > h2:first-child {
   margin-top: 2rem;
 }
 
+/*
+* For code-fold / code-tools, hide toggle for individual cells.
+* In effect, the code-tools allows zapping all code instantly
+* without having the `|> Code` everywhere
+*/
+// Hides |> Code toggle on individual cells
+details.code-fold > summary {
+  display: none;
+}
+.cell > details > summary {
+  display: none;
+}
+details.code-fold:not([open]),
+.cell details:not([open]) {
+    margin-bottom: 0em;
+}

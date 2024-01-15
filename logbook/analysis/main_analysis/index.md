@@ -1,6 +1,5 @@
 ---
 title: "Main analysis script"
-description: "Conducts simple main analysis"
 ---
 
 
@@ -32,7 +31,7 @@ mean(rnorm(1000))
 
 ```
 [1] 2
-[1] -0.007644191
+[1] 0.02145843
 ```
 
 
@@ -50,7 +49,7 @@ plot(mtcars$mpg, mtcars$hp)
 ```
 
 ::: {.cell-output-display}
-![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}
 :::
 :::
 

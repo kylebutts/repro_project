@@ -19,7 +19,7 @@ mean(rnorm(1000))
 ```
 
     [1] 2
-    [1] -0.007644191
+    [1] 0.02145843
 
 ## Plots
 
@@ -27,7 +27,7 @@ mean(rnorm(1000))
 plot(mtcars$mpg, mtcars$hp)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 ## Tables
 

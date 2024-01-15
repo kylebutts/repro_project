@@ -16,7 +16,7 @@
 library(tidyverse, warn.conflicts = FALSE)
 library(fixest)
 
-# %% 
+# %% Test label
 #| results: 'hold'
 1 + 1
 mean(rnorm(1000))
