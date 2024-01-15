@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/kylebutts/repro_project/index.html</loc>
-    <lastmod>2023-12-15T16:32:48.502Z</lastmod>
+    <loc>https://kylebutts.github.io/repro_project/index.html</loc>
+    <lastmod>2024-01-15T13:44:12.923Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/kylebutts/repro_project/analysis/python_code/index.html</loc>
-    <lastmod>2023-12-15T16:32:47.558Z</lastmod>
+    <loc>https://kylebutts.github.io/repro_project/analysis/python_code/index.html</loc>
+    <lastmod>2024-01-15T13:42:45.486Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/kylebutts/repro_project/analysis/main_analysis/index.html</loc>
-    <lastmod>2023-12-15T16:32:46.770Z</lastmod>
+    <loc>https://kylebutts.github.io/repro_project/analysis/main_analysis/index.html</loc>
+    <lastmod>2024-01-15T13:33:31.005Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/kylebutts/repro_project/analysis/plot_in_julia/index.html</loc>
-    <lastmod>2023-12-15T16:32:47.310Z</lastmod>
+    <loc>https://kylebutts.github.io/repro_project/analysis/plot_in_julia/index.html</loc>
+    <lastmod>2024-01-15T13:42:43.195Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/kylebutts/repro_project/cleaning/clean_census/index.html</loc>
-    <lastmod>2023-12-15T16:32:47.966Z</lastmod>
+    <loc>https://kylebutts.github.io/repro_project/cleaning/clean_census/index.html</loc>
+    <lastmod>2024-01-15T13:22:49.744Z</lastmod>
   </url>
 </urlset>

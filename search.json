@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Reproducible Log Book",
     "section": "",
-    "text": "View live example logbook"
+    "text": "View live example logbook\n\nThe goal of this project is to make it easy to create a reproducible logbook of your analysis pipeline using quarto. I want this to be additive, requiring minimal changes to your project. You don’t need to change your project structure, change how you code, etc.\nAdding this to your project requires minimal changes to your code:\n  .\n  ├── README.md\n  ├── ...\n  ├── code\n  │   ├── analysis\n  │   │   └── main_analysis.R\n  │   ├── cleaning\n  │   │   └── clean_census.R\n+ │   └── main.R\n+ └── logbook\n+    ├── analysis\n+    │   └── main_analysis\n+    │       ├── index.md\n+    │       ├── index_files\n+    │       │   └── ...\n+    │       └── readme.md\n+    ├── cleaning\n+    │   └── clean_census\n+    │       ├── index.md\n+    │       └── readme.md\n+    ├── render_file.R\n+    ├── _quarto.yml\n+    ├── copy_readme.R\n+    └── index.md\nFirst, add the logbook folder to your project. This folder contains the quarto configuration and render_file.R which creates a render_file() function for running and logging a script.\nLogbook contents: - logbook/render_file.R creates the render_file() function for logging script files. More details below. - logbook/_quarto.yml is the quarto configuration file. You don’t need to edit this. - README.md is the “front page” to your project. This shows up when you open the github repository. - logbook/copy_readme.R gets run every time you use quarto render on the logbook to keep index.md up to date.\nSecond, you need to create a script similar to code/main.R. It can be located anywhere. This scripts will create the reproduction pipeline and is just a list of calls to render_file() for each file. Calls should be ordered from top to bottom so that each file only depends on previously run scripts (i.e., a reproducible pipeline).\nNOTE: When working on the project, you don’t need to rerun everything to update the logbook. Each file can be logged seperately. Though, it is good to check that everything is reproducible from time to time.\n\n\nThe render_file() is basically a light wrapper around quarto::quarto_render().\nThis function takes a .R/.py/.jl script and renders it to a markdown log in the logbook folder. The index.md is what becomes the html page and the readme.md is what shows up on GitHub. #’ This function renders the file only one time and points to the same files (e.g. any plots created), so the memory and compute costs of two versions is minimal.\nYou can think of the render_file() as wrapping your code in one giant .qmd code chunk:\n``` r\n...\n```\nHowever, you can break your code up into chunks and write markdown right within the file. This isn’t great for writing a paper, but it’s great for small comments you want to display. Think of it like commenting your code in a way that presents nicely.\n\n\nThere is much more customization power possible using the # %% syntax. See for example, code/analysis/main_analysis.R. This syntax is used in .jl/.py/.R files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up cmd + shift + enter).\nWhen using render_file() (or quarto::quarto_render() directly), the # %% is converted to it’s own code cell and you can pass options to it just like in .qmd files, e.g.:\n# %% Chunk label\n#| echo: false\n#| warning: false\n\n\n\nTo insert markdown directly into your document (so that you can comment on your code):\n\nIn .R, use roxygen style comments like this:\n\n#' # Header\n#'\n#' Markdown text\n\nIn .py/.jl, use raw string literals like this:\n\n# %% [markdown]\n\"\"\"\n# Header\n\nMarkdown text\n\"\"\"\n\n\n\nTo render a script, quarto requires yaml frontmatter at the top of your script. The render_file script will insert a default one with a title field if it is not detected. The title will be based on the file name (e.g. run_regressions.R -&gt; Run Regressions). Note: you don’t need to pass format since render_file handles this\nYou can add yaml frontmatter as a comment markdown like above.\n\nIn .R:\n\n#' ---\n#' title: ''\n#' ---\n\nIn .py/.jl:\n\n# %% [markdown]\n# ---\n# title: 'Great title'\n# ---\n\n\n\nThe logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since logbook is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.\n\n\n\nAt the base of your project (not the logbook), you should have a README.md file for your project. This file is copied over to the front page of the logbook via the copy_readme.R script. Below is a template that I use in my projects."
   },
   {
     "objectID": "index.html#how-render_file-works",
     "href": "index.html#how-render_file-works",
     "title": "Reproducible Log Book",
-    "section": "How render_file() works",
-    "text": "How render_file() works\nThe render_file() is basically a light wrapper around quarto::quarto_render().\nThis function takes a .R/.py/.jl script and renders it to a markdown log in the logbook folder. The index.md is what becomes the html page and the readme.md is what shows up on GitHub. #’ This function renders the file only one time and points to the same files (e.g. any plots created), so the memory and compute costs of two versions is minimal.\nYou can think of the render_file() as wrapping your code in one giant .qmd code chunk:\n``` r\n...\n```\nHowever, you can break your code up into chunks and write markdown right within the file. This isn’t great for writing a paper, but it’s great for small comments you want to display. Think of it like commenting your code in a way that presents nicely.\n\nCode chunks\nThere is much more customization power possible using the # %% syntax. See for example, code/analysis/main_analysis.R. This syntax is used in .jl/.py/.R files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up cmd + shift + enter).\nWhen using render_file() (or quarto::quarto_render() directly), the # %% is converted to it’s own code cell and you can pass options to it just like in .qmd files, e.g.:\n# %% Chunk label\n#| echo: false\n#| warning: false\n\n\nAdding markdown into script\nTo insert markdown directly into your document (so that you can comment on your code):\n\nIn .R, use roxygen style comments like this:\n\n#' # Header\n#'\n#' Markdown text\n\nIn .py/.jl, use raw string literals like this:\n\n# %% [markdown]\n\"\"\"\n# Header\n\nMarkdown text\n\"\"\"\n\n\nYAML Frontmatter\nTo render a script, quarto requires yaml frontmatter at the top of your script. The render_file script will insert a default one with a title field if it is not detected. The title will be based on the file name (e.g. run_regressions.R -&gt; Run Regressions). Note: you don’t need to pass format since render_file handles this\nYou can add yaml frontmatter as a comment markdown like above.\n\nIn .R:\n\n#' ---\n#' title: ''\n#' ---\n\nIn .py/.jl:\n\n# %% [markdown]\n# ---\n# title: 'Great title'\n# ---\n\n\nDeploying logbook\nThe logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since logbook is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.\n\n\nREADME.md\nAt the base of your project (not the logbook), you should have a README.md file for your project. This file is copied over to the front page of the logbook via the copy_readme.R script. Below is a template that I use in my projects."
+    "section": "",
+    "text": "The render_file() is basically a light wrapper around quarto::quarto_render().\nThis function takes a .R/.py/.jl script and renders it to a markdown log in the logbook folder. The index.md is what becomes the html page and the readme.md is what shows up on GitHub. #’ This function renders the file only one time and points to the same files (e.g. any plots created), so the memory and compute costs of two versions is minimal.\nYou can think of the render_file() as wrapping your code in one giant .qmd code chunk:\n``` r\n...\n```\nHowever, you can break your code up into chunks and write markdown right within the file. This isn’t great for writing a paper, but it’s great for small comments you want to display. Think of it like commenting your code in a way that presents nicely.\n\n\nThere is much more customization power possible using the # %% syntax. See for example, code/analysis/main_analysis.R. This syntax is used in .jl/.py/.R files to denote code chunks and has editor support in VSCode. I love it because I can group lines of code that I want to run together in a chunk and in all three languages I can run them all together with one keyboard shortcut (I set up cmd + shift + enter).\nWhen using render_file() (or quarto::quarto_render() directly), the # %% is converted to it’s own code cell and you can pass options to it just like in .qmd files, e.g.:\n# %% Chunk label\n#| echo: false\n#| warning: false\n\n\n\nTo insert markdown directly into your document (so that you can comment on your code):\n\nIn .R, use roxygen style comments like this:\n\n#' # Header\n#'\n#' Markdown text\n\nIn .py/.jl, use raw string literals like this:\n\n# %% [markdown]\n\"\"\"\n# Header\n\nMarkdown text\n\"\"\"\n\n\n\nTo render a script, quarto requires yaml frontmatter at the top of your script. The render_file script will insert a default one with a title field if it is not detected. The title will be based on the file name (e.g. run_regressions.R -&gt; Run Regressions). Note: you don’t need to pass format since render_file handles this\nYou can add yaml frontmatter as a comment markdown like above.\n\nIn .R:\n\n#' ---\n#' title: ''\n#' ---\n\nIn .py/.jl:\n\n# %% [markdown]\n# ---\n# title: 'Great title'\n# ---\n\n\n\nThe logbook can be viewed on Github automatically just by clicking into folders (via the README.md file). However, deploying to a website requires some more setup. Since logbook is just a quarto project, deployment is just deploying a quarto project (from a non-root directory): https://quarto.org/docs/output-formats/html-publishing.html.\n\n\n\nAt the base of your project (not the logbook), you should have a README.md file for your project. This file is copied over to the front page of the logbook via the copy_readme.R script. Below is a template that I use in my projects."
   },
   {
     "objectID": "index.html#abstract",
@@ -32,27 +32,76 @@
     "href": "analysis/python_code/index.html",
     "title": "Python",
     "section": "",
-    "text": "1 + 1\n\n2"
+    "text": "Code\n1 + 1\n\n\n2",
+    "crumbs": [
+      "Analysis",
+      "Python"
+    ]
   },
   {
     "objectID": "analysis/main_analysis/index.html",
     "href": "analysis/main_analysis/index.html",
     "title": "Main analysis script",
     "section": "",
-    "text": "This is an example script that will be run by render_file and logged in the logbook.\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, warning, important, tip, and caution.\n\n\n\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\n\n\n1 + 1\n\n[1] 2\n\n\n\nplot(mtcars$mpg, mtcars$hp)\n\n\n\n\n\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n\n\n\n\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\nesttable(est)\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "This is an example script that will be run by render_file and logged in the logbook.\nCode\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\nCode\n1 + 1\nmean(rnorm(1000))\n\n\n[1] 2\n[1] -0.007644191",
+    "crumbs": [
+      "Analysis",
+      "Main analysis script"
+    ]
+  },
+  {
+    "objectID": "analysis/main_analysis/index.html#plots",
+    "href": "analysis/main_analysis/index.html#plots",
+    "title": "Main analysis script",
+    "section": "Plots",
+    "text": "Plots\n\n\nCode\nplot(mtcars$mpg, mtcars$hp)",
+    "crumbs": [
+      "Analysis",
+      "Main analysis script"
+    ]
+  },
+  {
+    "objectID": "analysis/main_analysis/index.html#tables",
+    "href": "analysis/main_analysis/index.html#tables",
+    "title": "Main analysis script",
+    "section": "Tables",
+    "text": "Tables\n\n\nCode\nknitr::kable(\n  mtcars[1:5, ], \n  caption = \"A knitr kable.\"\n)\n\n\n\nA knitr kable.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2",
+    "crumbs": [
+      "Analysis",
+      "Main analysis script"
+    ]
+  },
+  {
+    "objectID": "analysis/main_analysis/index.html#regression",
+    "href": "analysis/main_analysis/index.html#regression",
+    "title": "Main analysis script",
+    "section": "Regression",
+    "text": "Regression\n\n\nCode\nest = feols(mpg ~ hp | cyl, mtcars)\n\n\n\n\nCode\nesttable(est)\n\n\n                             est\nDependent Var.:              mpg\n                                \nhp              -0.0240 (0.0153)\nFixed-Effects:  ----------------\ncyl                          Yes\n_______________ ________________\nS.E.: Clustered          by: cyl\nObservations                  32\nR2                       0.75386\nWithin R2                0.07998\n---\nSignif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1",
+    "crumbs": [
+      "Analysis",
+      "Main analysis script"
+    ]
   },
   {
     "objectID": "analysis/plot_in_julia/index.html",
     "href": "analysis/plot_in_julia/index.html",
     "title": "Plot In Julia",
     "section": "",
-    "text": "using Plots\n\nx = -3:0.01:3\nplot(x, sin.(x), label=\"sin(x)\")"
+    "text": "Code\nusing Plots\n\nx = -3:0.01:3\nplot(x, sin.(x), label=\"sin(x)\")",
+    "crumbs": [
+      "Analysis",
+      "Plot In Julia"
+    ]
   },
   {
     "objectID": "cleaning/clean_census/index.html",
     "href": "cleaning/clean_census/index.html",
     "title": "Clean Census data",
     "section": "",
-    "text": "cat(\"Cleaning data\")\n\nCleaning data"
+    "text": "Code\ncat(\"Cleaning data\")\n\n\nCleaning data",
+    "crumbs": [
+      "Cleaning",
+      "Clean Census data"
+    ]
   }
 ]
