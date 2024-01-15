@@ -39,7 +39,7 @@
     "href": "analysis/main_analysis/index.html",
     "title": "Main analysis script",
     "section": "",
-    "text": "This is an example script that will be run by render_file and logged in the logbook.\nCode\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\nCode\n1 + 1\nmean(rnorm(1000))\n\n\n[1] 2\n[1] -0.007644191"
+    "text": "This is an example script that will be run by render_file and logged in the logbook.\nCode\nlibrary(tidyverse, warn.conflicts = FALSE)\nlibrary(fixest)\nCode\n1 + 1\nmean(rnorm(1000))\n\n\n[1] 2\n[1] 0.02145843"
   },
   {
     "objectID": "analysis/main_analysis/index.html#plots",
