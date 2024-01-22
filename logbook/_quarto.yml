@@ -15,6 +15,7 @@ format:
     theme: 
       - cosmo
       - cell-output.scss
+    highlight-style: github
     toc: true
     toc-depth: 4
     toc-expand: 4
