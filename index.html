@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Logbook</a> 
@@ -185,12 +185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="4">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#reproducible-log-book" id="toc-reproducible-log-book" class="nav-link active" data-scroll-target="#reproducible-log-book">Reproducible Log Book</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#how-render_file-works" id="toc-how-render_file-works" class="nav-link" data-scroll-target="#how-render_file-works">How <code>render_file()</code> works</a>
   <ul class="collapse">
   <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   <li><a href="#paper-title" id="toc-paper-title" class="nav-link" data-scroll-target="#paper-title">Paper Title</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
   </ul></li>
@@ -335,6 +335,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<div class="toc-actions" id="source-code-toggler">
+	<ul>
+		<li>
+			<div class="toggle form-check">
+				<input class="form-check-input" type="checkbox" checked="" id="toggle-code-checkbox" style="margin-right: 0.4em; font-size: 0.8rem">
+				<label class="form-check-label" for="toggle-code-checkbox">Code visibility</label>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<script>
+	window.document.addEventListener("DOMContentLoaded", function (event) {
+		// Move to sidebar
+		const sourceCodeToggler = window.document.getElementById(
+			"source-code-toggler"
+		)
+		const sidebar = window.document.getElementById("quarto-margin-sidebar")
+		document
+			.querySelector("#quarto-margin-sidebar")
+			.appendChild(sourceCodeToggler)
+
+		// Delete if there are no source code cells
+		const cellCodeDivs = document.querySelectorAll(".cell > .sourceCode")
+		if (cellCodeDivs.length === 0) {
+			sourceCodeToggler.remove()
+			return
+		}
+
+		// Make toggle interactive
+		function toggleCellCodeDivs() {
+			const cellCodeDivs = document.querySelectorAll(".cell > .sourceCode")
+			const toggleCodeCheckbox = document.getElementById("toggle-code-checkbox")
+
+			for (let i = 0; i < cellCodeDivs.length; i++) {
+				if (toggleCodeCheckbox.checked) {
+					cellCodeDivs[i].classList.remove("hidden")
+				} else {
+					cellCodeDivs[i].classList.add("hidden")
+				}
+			}
+		}
+
+		const toggleCodeCheckbox = document.getElementById("toggle-code-checkbox")
+		if (toggleCodeCheckbox) {
+			toggleCodeCheckbox.addEventListener("change", toggleCellCodeDivs)
+		}
+	})
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -414,57 +463,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
