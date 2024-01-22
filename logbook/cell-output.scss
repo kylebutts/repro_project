@@ -1,9 +1,4 @@
 /*-- scss:rules --*/
-/* Weird spacing on headers */
-main.content > section:first-of-type > h2:first-child {
-  margin-top: 2rem;
-}
-
 /* Left border for cell-output (stdout, stdwrn, stderr) */
 .cell-output pre {
   border-left: 2px solid rgba(red($code-block-bg-color), green($code-block-bg-color), blue($code-block-bg-color), 1);
