@@ -1,52 +1,11 @@
 /*-- scss:rules --*/
-.cell-output pre {
-  // background-color: $code-block-bg-color;
-  // border: 1px solid $code-block-bg-color;
-  // border-radius: $border-radius;
-  border-left: 2px solid rgba(red($code-block-bg-color), green($code-block-bg-color), blue($code-block-bg-color), 1);
-  padding: $code-block-bg-padding;
-}
-
+/* Weird spacing on headers */
 main.content > section:first-of-type > h2:first-child {
   margin-top: 2rem;
 }
 
-/*
-* Action items
-*/ 
-div[role=action-items] {
-  z-index: 1020;
-}
-div[role=action-items] > #action-items-title {
-  font-size: $toc-font-size;
-  font-weight: 500;
-  margin-bottom: 0.2rem;
-  margin-top: 0.3rem;
-  font-family: inherit;
-  border-bottom: 0;
-  padding-bottom: 0;
-  padding-top: 0px;
-}
-div[role=action-items] > div.toggle {
-  font-size: $toc-tools-font-size;
-  margin-left: 0.45em;
-}
-div[role=action-items] > .form-switch .form-check-input {
-  border-radius: $form-switch-border-radius;
-}
-/*
-* For code-fold / code-tools, hide toggle for individual cells.
-* In effect, the code-tools allows zapping all code instantly
-* without having the `|> Code` everywhere
-*/
-// Hides |> Code toggle on individual cells
-details.code-fold > summary {
-  display: none;
-}
-.cell > details > summary {
-  display: none;
-}
-details.code-fold:not([open]),
-.cell details:not([open]) {
-    margin-bottom: 0em;
+/* Left border for cell-output (stdout, stdwrn, stderr) */
+.cell-output pre {
+  border-left: 2px solid rgba(red($code-block-bg-color), green($code-block-bg-color), blue($code-block-bg-color), 1);
+  padding: $code-block-bg-padding;
 }
