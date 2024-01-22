@@ -1,6 +1,6 @@
 project:
   type: website
-  pre-render: copy_readme.R
+  # pre-render: copy_readme.R
   render: 
     - "**/index.md"
 
@@ -15,7 +15,7 @@ format:
       - cosmo
       - custom.scss
     toc: true
-    code-fold: show
-    code-tools: 
-      source: false
-      toggle: true
+    toc-depth: 4
+    toc-expand: 4
+    include-after-body: 
+      - action_items.html # Toggle code visibility

@@ -12,6 +12,29 @@ main.content > section:first-of-type > h2:first-child {
 }
 
 /*
+* Action items
+*/ 
+div[role=action-items] {
+  z-index: 1020;
+}
+div[role=action-items] > #action-items-title {
+  font-size: $toc-font-size;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  margin-top: 0.3rem;
+  font-family: inherit;
+  border-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 0px;
+}
+div[role=action-items] > div.toggle {
+  font-size: $toc-tools-font-size;
+  margin-left: 0.45em;
+}
+div[role=action-items] > .form-switch .form-check-input {
+  border-radius: $form-switch-border-radius;
+}
+/*
 * For code-fold / code-tools, hide toggle for individual cells.
 * In effect, the code-tools allows zapping all code instantly
 * without having the `|> Code` everywhere

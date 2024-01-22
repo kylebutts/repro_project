@@ -1,0 +1,50 @@
+<div id="action-items" role="action-items">
+	<p id="action-items-title">Action Items</p>
+	<div class="toggle form-check form-switch">
+		<input
+			class="form-check-input"
+			type="checkbox"
+			role="switch"
+			id="toggle-code-checkbox"
+			checked
+		/>
+		<label class="form-check-label" for="toggle-code-checkbox"
+			>Code visibility</label
+		>
+	</div>
+</div>
+
+<script>
+	window.document.addEventListener("DOMContentLoaded", function (event) {
+		
+		// Toggle cell codes
+		function toggleCellCodeDivs() {
+			const cellCodeDivs = document.querySelectorAll(".cell > .sourceCode")
+			const toggleCodeCheckbox = document.getElementById("toggle-code-checkbox")
+
+			for (let i = 0; i < cellCodeDivs.length; i++) {
+				if (toggleCodeCheckbox.checked) {
+					cellCodeDivs[i].classList.remove("hidden")
+				} else {
+					cellCodeDivs[i].classList.add("hidden")
+				}
+			}
+		}
+
+		const toggleCodeCheckbox = document.getElementById("toggle-code-checkbox")
+		if (toggleCodeCheckbox) {
+			toggleCodeCheckbox.addEventListener("change", toggleCellCodeDivs)
+		}
+
+		// Move button to sidebar
+		const actionItems = window.document.getElementById("action-items")
+		const sidebar = window.document.getElementById("quarto-margin-sidebar")
+		sidebar.appendChild(actionItems)
+
+		// Delete if there are no source code cells
+		const cellCodeDivs = document.querySelectorAll(".cell > .sourceCode")
+		if (cellCodeDivs.length === 0) {
+			actionItems.remove()
+		}
+	})
+</script>
