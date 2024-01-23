@@ -23,7 +23,9 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::here
+          cache-version: 2
+          packages: |
+            any::here
       
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
