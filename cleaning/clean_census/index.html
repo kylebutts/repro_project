@@ -232,9 +232,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 		const sourceCodeToggler = window.document.getElementById(
 			"source-code-toggler"
 		)
-		const sidebar = window.document.getElementById("quarto-margin-sidebar")
-		document
-			.querySelector("#quarto-margin-sidebar")
+		window.document
+			.querySelector("#quarto-margin-sidebar #TOC")
 			.appendChild(sourceCodeToggler)
 
 		// Delete if there are no source code cells
