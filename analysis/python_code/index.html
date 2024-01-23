@@ -228,20 +228,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script>
 	window.document.addEventListener("DOMContentLoaded", function (event) {
-		// Move to sidebar
 		const sourceCodeToggler = window.document.getElementById(
 			"source-code-toggler"
 		)
-		window.document
-			.querySelector("#quarto-margin-sidebar #TOC")
-			.appendChild(sourceCodeToggler)
+		const hasTOC = !(
+			window.document.querySelector("#quarto-margin-sidebar #TOC") === null
+		)
+		const hasSourceCodeCells =
+			document.querySelectorAll(".cell > .sourceCode").length > 0
 
 		// Delete if there are no source code cells
-		const cellCodeDivs = document.querySelectorAll(".cell > .sourceCode")
-		if (cellCodeDivs.length === 0) {
+		if (!hasSourceCodeCells) {
 			sourceCodeToggler.remove()
 			return
 		}
+
+		// Create TOC if it doesn't exist
+		if (!hasTOC) {
+			const tocElement = window.document.createElement("nav")
+			tocElement.id = "TOC"
+			tocElement.setAttribute("role", "doc-toc")
+			tocElement.classList.add("toc-active")
+			window.document
+				.querySelector("#quarto-margin-sidebar")
+				.appendChild(tocElement)
+		}
+
+		// Move into `#TOC`
+		window.document
+			.querySelector("#quarto-margin-sidebar #TOC")
+			.appendChild(sourceCodeToggler)
 
 		// Make toggle interactive
 		function toggleCellCodeDivs() {
