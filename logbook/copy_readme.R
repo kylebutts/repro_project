@@ -1,5 +1,7 @@
+library(here)
 readme_file <- here::here("README.md")
 out_file <- here::here("logbook", "index.md")
+
 if (fs::file_exists(readme_file)) {
   fs::file_copy(readme_file, out_file, overwrite = TRUE)
 } else {
