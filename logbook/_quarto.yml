@@ -1,6 +1,6 @@
 project:
   type: website
-  pre-render: copy_readme.R
+  pre-render: include/copy_readme.R
   render: 
     - "**/index.md"
 
@@ -14,10 +14,10 @@ format:
   html:
     theme: 
       - cosmo
-      - cell-output.scss
+      - include/cell-output.scss
     highlight-style: github
     toc: true
     toc-depth: 4
     toc-expand: 4
     include-after-body: 
-      - toggle-code.html # Button to toggle code visibility
+      - include/toggle-code.html # Button to toggle code visibility
