@@ -1,4 +1,11 @@
+# %% 
+# ---
+# title: 'Julia'
+# ---
+
 # %%
+using Pkg
+Pkg.add("Plots")
 using Plots
 
 x = -3:0.01:3

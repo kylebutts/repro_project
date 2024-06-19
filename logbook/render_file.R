@@ -291,3 +291,35 @@ render_file <- function(
 
   return(invisible(TRUE))
 }
+
+
+#' Customize tictoc out message
+#' @param tictoc Result of `tictoc::toc()`
+#' @keywords internal
+format_tictoc_msg <- function(tictoc) {
+  tic <- tictoc$tic
+  toc <- tictoc$toc
+  msg <- tictoc$msg
+
+  x <- as.numeric(difftime(toc, tic, units = "secs"))
+  message_str <- if (is.null(msg) || is.na(msg) || length(msg) == 0) {
+    ""
+  } else {
+    sprintf("%s: ", msg[1])
+  }
+  hour_str <- if (floor(x / 86400) > 0) {
+    sprintf("%02d:", floor(x / 86400))
+  } else {
+     ""
+  }
+
+  sprintf(
+    "%s%s%02d:%02d:%02d", 
+    message_str, hour_str,
+    floor((x %% 86400) / 3600), 
+    floor((x %% 3600) / 60),  
+    floor(x %% 60)
+  )
+}
+
+

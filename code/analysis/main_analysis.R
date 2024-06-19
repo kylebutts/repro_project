@@ -15,6 +15,7 @@
 #| warning: false
 library(tidyverse, warn.conflicts = FALSE)
 library(fixest)
+library(tinytable)
 
 # %% Test label
 #| results: 'hold'
@@ -27,14 +28,12 @@ plot(mtcars$mpg, mtcars$hp)
 
 #' ## Tables
 # %% 
-knitr::kable(
+tinytable::tt(
   mtcars[1:5, ], 
-  caption = "A knitr kable."
+  caption = "First five rows of `mtcars`"
 )
 
 #' ## Regression
 # %%
 est = feols(mpg ~ hp | cyl, mtcars)
-
-# %%
 esttable(est)

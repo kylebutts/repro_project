@@ -3,7 +3,7 @@ title: 'Python'
 ---
 
 
-::: {#1d27e494 .cell execution_count=1}
+::: {#36201ad6 .cell execution_count=1}
 ``` {.python .cell-code}
 1 + 1
 ```
