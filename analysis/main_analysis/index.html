@@ -138,6 +138,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../replication_info/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code runtimes:</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -238,14 +244,15 @@ Note
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2
-[1] -0.03452145</code></pre>
+[1] 0.05055768</code></pre>
 </div>
 </div>
 <section id="plots" class="level2">
@@ -264,126 +271,190 @@ Note
 <section id="tables" class="level2">
 <h2 class="anchored" data-anchor-id="tables">Tables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tinytable<span class="sc">::</span><span class="fu">tt</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ], </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"A knitr kable."</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"First five rows of `mtcars`"</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>A knitr kable.</caption>
-<colgroup>
-<col style="width: 26%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 7%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">mpg</th>
-<th style="text-align: right;">cyl</th>
-<th style="text-align: right;">disp</th>
-<th style="text-align: right;">hp</th>
-<th style="text-align: right;">drat</th>
-<th style="text-align: right;">wt</th>
-<th style="text-align: right;">qsec</th>
-<th style="text-align: right;">vs</th>
-<th style="text-align: right;">am</th>
-<th style="text-align: right;">gear</th>
-<th style="text-align: right;">carb</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Mazda RX4</td>
-<td style="text-align: right;">21.0</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.90</td>
-<td style="text-align: right;">2.620</td>
-<td style="text-align: right;">16.46</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mazda RX4 Wag</td>
-<td style="text-align: right;">21.0</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.90</td>
-<td style="text-align: right;">2.875</td>
-<td style="text-align: right;">17.02</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Datsun 710</td>
-<td style="text-align: right;">22.8</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">108</td>
-<td style="text-align: right;">93</td>
-<td style="text-align: right;">3.85</td>
-<td style="text-align: right;">2.320</td>
-<td style="text-align: right;">18.61</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Hornet 4 Drive</td>
-<td style="text-align: right;">21.4</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">258</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.08</td>
-<td style="text-align: right;">3.215</td>
-<td style="text-align: right;">19.44</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Hornet Sportabout</td>
-<td style="text-align: right;">18.7</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">360</td>
-<td style="text-align: right;">175</td>
-<td style="text-align: right;">3.15</td>
-<td style="text-align: right;">3.440</td>
-<td style="text-align: right;">17.02</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">2</td>
-</tr>
-</tbody>
-</table>
+ 
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_p86rqmxooqi68ha1gpkn</title>
+    <style>
+.table td.tinytable_css_1300edpbpfziwn9pz3wl, .table th.tinytable_css_1300edpbpfziwn9pz3wl {    border-bottom: solid 0.1em #d3d8dc; }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_p86rqmxooqi68ha1gpkn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        </thead><caption>First five rows of `mtcars`</caption>
+              <tbody><tr>
+                <th scope="col">mpg</th>
+                <th scope="col">cyl</th>
+                <th scope="col">disp</th>
+                <th scope="col">hp</th>
+                <th scope="col">drat</th>
+                <th scope="col">wt</th>
+                <th scope="col">qsec</th>
+                <th scope="col">vs</th>
+                <th scope="col">am</th>
+                <th scope="col">gear</th>
+                <th scope="col">carb</th>
+              </tr>
+        
+        
+        </tbody><tbody>
+                <tr>
+                  <td>21.0</td>
+                  <td>6</td>
+                  <td>160</td>
+                  <td>110</td>
+                  <td>3.90</td>
+                  <td>2.620</td>
+                  <td>16.46</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>4</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>21.0</td>
+                  <td>6</td>
+                  <td>160</td>
+                  <td>110</td>
+                  <td>3.90</td>
+                  <td>2.875</td>
+                  <td>17.02</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>4</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>22.8</td>
+                  <td>4</td>
+                  <td>108</td>
+                  <td> 93</td>
+                  <td>3.85</td>
+                  <td>2.320</td>
+                  <td>18.61</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>4</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>21.4</td>
+                  <td>6</td>
+                  <td>258</td>
+                  <td>110</td>
+                  <td>3.08</td>
+                  <td>3.215</td>
+                  <td>19.44</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>3</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>18.7</td>
+                  <td>8</td>
+                  <td>360</td>
+                  <td>175</td>
+                  <td>3.15</td>
+                  <td>3.440</td>
+                  <td>17.02</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>3</td>
+                  <td>2</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function styleCell_tinytable_vjqwkvv2oslcd1txwfyx(i, j, css_id) {
+        var table = document.getElementById("tinytable_p86rqmxooqi68ha1gpkn");
+        table.rows[i].cells[j].classList.add(css_id);
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_p86rqmxooqi68ha1gpkn');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_tinytable_vjqwkvv2oslcd1txwfyx(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_p86rqmxooqi68ha1gpkn");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 0, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 1, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 2, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 3, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 4, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 5, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 6, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 7, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 8, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 9, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+window.addEventListener('load', function () { styleCell_tinytable_vjqwkvv2oslcd1txwfyx(0, 10, 'tinytable_css_1300edpbpfziwn9pz3wl') })
+    </script>
+
+  
+
+
 </div>
 </div>
 </section>
 <section id="regression" class="level2">
 <h2 class="anchored" data-anchor-id="regression">Regression</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>est <span class="ot">=</span> <span class="fu">feols</span>(mpg <span class="sc">~</span> hp <span class="sc">|</span> cyl, mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esttable</span>(est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>est <span class="ot">=</span> <span class="fu">feols</span>(mpg <span class="sc">~</span> hp <span class="sc">|</span> cyl, mtcars)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">esttable</span>(est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                             est
 Dependent Var.:              mpg
